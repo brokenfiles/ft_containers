@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/louis/42/ft_containers/Stack.hpp
+deque
+-
+
+/Users/louis/42/ft_containers/main.cpp
+iostream
+-
+Stack.hpp
+/Users/louis/42/ft_containers/Stack.hpp
+
