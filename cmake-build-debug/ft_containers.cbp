@@ -89,7 +89,13 @@
 		<Unit filename="/Users/louis/42/ft_containers/Vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/colors.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/utils.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/CMakeLists.txt">

@@ -6,13 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/Users/louis/42/ft_containers/Stack.hpp
-deque
--
-
-/Users/louis/42/ft_containers/main.cpp
+/Users/louis/42/ft_containers/List.hpp
 iostream
 -
-Stack.hpp
-/Users/louis/42/ft_containers/Stack.hpp
+
+/Users/louis/42/ft_containers/Vector.hpp
+iostream
+-
+cmath
+-
+utils.hpp
+/Users/louis/42/ft_containers/utils.hpp
+
+/Users/louis/42/ft_containers/main.cpp
+List.hpp
+/Users/louis/42/ft_containers/List.hpp
+Vector.hpp
+/Users/louis/42/ft_containers/Vector.hpp
+list
+-
+
+/Users/louis/42/ft_containers/utils.hpp
 
