@@ -10,15 +10,15 @@ int main()
 	ft::Vector<int> vector;
 	for (int i = 0; i < 4; ++i)
 	{
-		vector.push_back(i);
+		vector.push_back(i + 'a');
 	}
 
-	std::cout << "current capacity : " << vector.capacity() << std::endl;
-
-	vector.resize(0);
-	std::cout << "current capacity : " << vector.capacity() << std::endl;
+//	vector.resize(4);
+//	vector.clear();
 	ft::Vector<int> two;
 	two.insert(two.begin(), vector.begin(), vector.end());
+	two.erase(two.begin(), two.end());
+	std::cout << "two len : " << two.size() << std::endl;
 	for (sz = 0; sz < two.size(); ++sz)
 	{
 		std::cout << "value at index " << sz << " : " << two[sz] << std::endl;

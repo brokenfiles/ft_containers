@@ -357,7 +357,7 @@ namespace ft
 		const allocator_type& alloc = allocator_type())
 		{
 			this->c_len = 0;
-			this->c_capacity = last - first;
+			this->c_capacity = this->get_new_capacity(last - first);
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 			this->assign(first, last);
@@ -409,7 +409,6 @@ namespace ft
 		 * Iterators
 		 */
 
-		// TODO implement iterators
 		iterator begin() { return (iterator(&this->at(0))); }
 		const_iterator begin() const { return (const_iterator(&this->at(0))); }
 
@@ -775,7 +774,7 @@ namespace ft
 		void insert (iterator position, iterator first, iterator last)
 		{
 			difference_type _position_index = position - this->begin();
-			difference_type _elements = last - first + 1;
+			difference_type _elements = last - first;
 			if (_elements <= 0) { return ; }
 			this->reserve(this->get_new_capacity(this->size() + _elements));
 			for (size_type i = (this->size() + _elements); i >= _elements; --i)
@@ -800,7 +799,7 @@ namespace ft
 		void insert (iterator position, const_iterator first, const_iterator last)
 		{
 			difference_type _position_index = position - this->begin();
-			difference_type _elements = last - first + 1;
+			difference_type _elements = last - first;
 			if (_elements <= 0) { return ; }
 			this->reserve(this->get_new_capacity(this->size() + _elements));
 			for (size_type i = (this->size() + _elements); i >= _elements; --i)
@@ -844,7 +843,7 @@ namespace ft
 		{
 			difference_type _first_index = first - this->begin();
 			difference_type _last_index  = last  - this->begin();
-			difference_type _elements    = last - first + 1;
+			difference_type _elements    = last - first;
 
 			for ( ; _first_index < _last_index; ++_first_index)
 			 { this->c_container[_first_index] = this->c_container[_first_index + _elements]; }
