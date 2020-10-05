@@ -470,7 +470,7 @@ namespace ft
 			if (n < this->size())
 			 { this->erase(this->begin() + n, this->end()); }
 			else if (n > this->size())
-			 { this->insert(this->end() + 1, n - this->size() - 1, val); }
+			 { this->insert(this->end(), n - this->size(), val); }
 		}
 
 		/**
@@ -581,7 +581,7 @@ namespace ft
 		 */
 		const_reference at (size_type n) const
 		{
-			return (this->c_container + n);
+			return (*(this->c_container + n));
 		}
 
 		/**
@@ -714,7 +714,7 @@ namespace ft
 		 */
 		void pop_back()
 		{
-			this->erase(this->end() - 1);
+			this->erase(this->end());
 		}
 
 		/**
@@ -821,9 +821,9 @@ namespace ft
 		 */
 		iterator erase (iterator position)
 		{
-			difference_type _pos_index = position - this->begin();
+			difference_type _pos_index = position - this->begin() - 1;
 			for (size_type index = _pos_index; index < this->size() - 1; index ++)
-			{ this->c_container[index] = this->c_container[index + 1]; }
+			 { this->c_container[index] = this->c_container[index + 1]; }
 			this->c_len --;
 			return (position + 1);
 		}
@@ -890,9 +890,59 @@ namespace ft
 		{
 			return (this->allocator);
 		}
-
 	};
 
 	// TODO implement relational operators
+	template<class T>
+	bool operator==(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+		 { return (false); }
+		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
+		{
+			if (lhs[i] != rhs[i])
+			 { return false; }
+		}
+		return (true);
+	}
+
+	template<class T>
+	bool operator<(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		if (lhs.size() < rhs.size())
+		 { return true; }
+		if (lhs.size() > rhs.size())
+		 { return false; }
+		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
+		{
+			if (lhs[i] > rhs[i])
+			 { return (false); }
+		}
+		return (true);
+	}
+
+	template<class T>
+	bool operator!=(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		return (!(lhs == rhs));
+	}
+
+	template<class T>
+	bool operator>(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template<class T>
+	bool operator<=(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		return (!(rhs < lhs));
+	}
+
+	template<class T>
+	bool operator>=(const Vector<T> &lhs, const Vector<T> &rhs)
+	{
+		return (!(lhs < rhs));
+	}
 
 }

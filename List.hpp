@@ -29,7 +29,7 @@ namespace ft
 		 */
 		Node()
 		{
-			content = static_cast<T>(NULL);
+			content = T();
 			prev    = NULL;
 			next    = NULL;
 		}
@@ -695,8 +695,8 @@ namespace ft
 				this->c_end->remove();
 				delete this->c_end;
 				this->c_end = new_last_node;
+				this->c_len--;
 			}
-			this->c_len--;
 		}
 
 		/**

@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/louis/42/ft_containers/List.hpp
+iostream
+-
+
+/Users/louis/42/ft_containers/Stack.hpp
+deque
+-
+List.hpp
+/Users/louis/42/ft_containers/List.hpp
+
+/Users/louis/42/ft_containers/Vector.hpp
+iostream
+-
+cmath
+-
+utils.hpp
+/Users/louis/42/ft_containers/utils.hpp
+
+/Users/louis/42/ft_containers/main.cpp
+List.hpp
+/Users/louis/42/ft_containers/List.hpp
+Vector.hpp
+/Users/louis/42/ft_containers/Vector.hpp
+Stack.hpp
+/Users/louis/42/ft_containers/Stack.hpp
+list
+-
+
+/Users/louis/42/ft_containers/utils.hpp
+

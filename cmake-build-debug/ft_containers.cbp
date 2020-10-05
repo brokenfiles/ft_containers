@@ -83,6 +83,12 @@
 		<Unit filename="/Users/louis/42/ft_containers/List.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/MutantStack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Queue.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Stack.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
