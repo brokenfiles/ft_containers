@@ -1,4 +1,4 @@
-#include "List.hpp"
+#include "../List/List.hpp"
 
 namespace ft
 {
@@ -18,8 +18,6 @@ namespace ft
 	public:
 		Queue (const container_type& ctnr = container_type())
 		{ this->c_container = ctnr; }
-
-		Queue() { }
 
 		Queue operator= (const Queue rhs)
 				{ this->c_container = rhs.c_container; }

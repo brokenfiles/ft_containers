@@ -80,19 +80,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/louis/42/ft_containers/List.hpp">
+		<Unit filename="/Users/louis/42/ft_containers/List/List.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/MutantStack.hpp">
+		<Unit filename="/Users/louis/42/ft_containers/Map/Less.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Queue.hpp">
+		<Unit filename="/Users/louis/42/ft_containers/Map/Map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Stack.hpp">
+		<Unit filename="/Users/louis/42/ft_containers/Queue/Queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Vector.hpp">
+		<Unit filename="/Users/louis/42/ft_containers/Stack/Stack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Vector/Vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/colors.hpp">

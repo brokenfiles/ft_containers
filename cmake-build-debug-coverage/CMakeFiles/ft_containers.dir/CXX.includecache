@@ -6,32 +6,40 @@
 
 #IncludeRegexTransform: 
 
-/Users/louis/42/ft_containers/List.hpp
+/Users/louis/42/ft_containers/List/List.hpp
 iostream
 -
 
-/Users/louis/42/ft_containers/Stack.hpp
+/Users/louis/42/ft_containers/Queue/Queue.hpp
+../List/List.hpp
+/Users/louis/42/ft_containers/List/List.hpp
+
+/Users/louis/42/ft_containers/Stack/Stack.hpp
 deque
 -
-List.hpp
-/Users/louis/42/ft_containers/List.hpp
+../List/List.hpp
+/Users/louis/42/ft_containers/List/List.hpp
 
-/Users/louis/42/ft_containers/Vector.hpp
+/Users/louis/42/ft_containers/Vector/Vector.hpp
 iostream
 -
 cmath
 -
-utils.hpp
+../utils.hpp
 /Users/louis/42/ft_containers/utils.hpp
 
 /Users/louis/42/ft_containers/main.cpp
-List.hpp
-/Users/louis/42/ft_containers/List.hpp
-Vector.hpp
-/Users/louis/42/ft_containers/Vector.hpp
-Stack.hpp
-/Users/louis/42/ft_containers/Stack.hpp
+List/List.hpp
+/Users/louis/42/ft_containers/List/List.hpp
+Vector/Vector.hpp
+/Users/louis/42/ft_containers/Vector/Vector.hpp
+Stack/Stack.hpp
+/Users/louis/42/ft_containers/Stack/Stack.hpp
+Queue/Queue.hpp
+/Users/louis/42/ft_containers/Queue/Queue.hpp
 list
+-
+queue
 -
 
 /Users/louis/42/ft_containers/utils.hpp

@@ -1,7 +1,7 @@
-#include "List.hpp"
-#include "Vector.hpp"
-#include "Stack.hpp"
-#include "Queue.hpp"
+#include "List/List.hpp"
+#include "Vector/Vector.hpp"
+#include "Stack/Stack.hpp"
+#include "Queue/Queue.hpp"
 #include <list>
 #include <queue>
 

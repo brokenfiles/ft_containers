@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "utils.hpp"
+#include "../utils.hpp"
 
 namespace ft
 {
@@ -702,7 +702,7 @@ namespace ft
 			// make request to reserve some space
 			if (this->size() + 1 > this->capacity())
 			 { this->reserve(get_new_capacity(this->size() + 1)); }
-			// pushing value
+			// pushwing value
 			this->c_container[this->size()] = val;
 			this->c_len ++;
 		}
