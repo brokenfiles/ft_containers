@@ -1,44 +1,54 @@
+#include "Tests/list.hpp"
 #include "List/List.hpp"
 #include "Vector/Vector.hpp"
-#include "Stack/Stack.hpp"
-#include "Queue/Queue.hpp"
+#include "Map/Map.hpp"
 #include <list>
-#include <queue>
+#include <vector>
+#include <map>
 
-bool pred(std::string &val)
+
+void	print_vector(ft::Vector<int>::iterator it, ft::Vector<int>::iterator ite)
 {
-	return (val == "comment ca va");
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		it++;
+	}
+}
+void	print_vector(std::vector<int>::iterator it, std::vector<int>::iterator ite)
+{
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		it++;
+	}
 }
 
 int main()
 {
-	ft::Queue<int> queue;
-	queue.push(5);
-	queue.push(10);
-	queue.push(15);
-	queue.push(20);
+//	exec_test_list<ft::List<int> >();
+//	exec_test_list<std::list<int> >();
+	ft::Vector<int> myvector (3,100);
+	ft::Vector<int>::iterator it;
 
-	return 0;
-}
+	it = myvector.begin();
+	it = myvector.insert ( it , 200 );
 
-int other_main()
-{
-	ft::Vector<std::string>::size_type sz;
-	ft::Vector<std::string> vector;
-	for (int i = 0; i < 3; ++i)
-	 { vector.push_back("bonjour " + std::to_string(i)); }
+	myvector.insert (it,(size_t)2,300);
 
-	vector.insert(vector.end() - (vector.size() / 2), 3, "yo lekip");
-	ft::Vector<std::string> two = vector;
-//	vector.pop_back();
-//	vector.erase(vector.end() - 1);
-//	vector.clear();
-//	two.insert(two.begin(), vector.begin(), vector.end());
-//	two.erase(two.begin() + 1, two.end() - 1);
-	std::cout << "two len : " << two.size() << std::endl;
-	std::cout << "two cap : " << two.capacity() << std::endl;
-	std::cout << "back val : " << two.back() << std::endl;
-	for (sz = 0; sz < two.size(); ++sz)
-	 { std::cout << "value at index " << sz << " : " << two[sz] << std::endl; }
+	// "it" no longer valid, get a new one:
+	it = myvector.begin();
+
+	ft::Vector<int> anothervector (2,400);
+	myvector.insert (it+2,anothervector.begin(),anothervector.end());
+
+	int myarray [] = { 501,502,503 };
+	myvector.insert (myvector.begin(), myarray, myarray+3);
+
+	std::cout << "myvector contains:";
+	for (it=myvector.begin(); it<myvector.end(); it++)
+		std::cout << ' ' << *it;
+	std::cout << '\n';
+
 	return 0;
 }

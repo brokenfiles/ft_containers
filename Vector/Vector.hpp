@@ -121,14 +121,34 @@ namespace ft
 		 * Equality operators
 		 */
 
-		bool operator==(const VectorIterator<T>& rhs)
+		bool operator==(const VectorIterator& rhs)
 		{
 			return (this->ptr_content == rhs.ptr_content);
 		}
 
-		bool operator!=(const VectorIterator<T>& rhs)
+		bool operator!=(const VectorIterator& rhs)
 		{
 			return (this->ptr_content != rhs.ptr_content);
+		}
+
+		bool operator <(const VectorIterator& rhs)
+		{
+			return (this->ptr_content < rhs.ptr_content);
+		}
+
+		bool operator >(const VectorIterator& rhs)
+		{
+			return (this->ptr_content > rhs.ptr_content);
+		}
+
+		bool operator <=(const VectorIterator& rhs)
+		{
+			return (this->ptr_content <= rhs.ptr_content);
+		}
+
+		bool operator >=(const VectorIterator& rhs)
+		{
+			return (this->ptr_content >= rhs.ptr_content);
 		}
 	};
 
@@ -248,14 +268,34 @@ namespace ft
 		 * Equality operators
 		 */
 
-		bool operator==(const ReverseVectorIterator<T>& rhs)
+		bool operator==(const ReverseVectorIterator& rhs)
 		{
 			return (this->ptr_content == rhs.ptr_content);
 		}
 
-		bool operator!=(const ReverseVectorIterator<T>& rhs)
+		bool operator!=(const ReverseVectorIterator& rhs)
 		{
 			return (this->ptr_content != rhs.ptr_content);
+		}
+
+		bool operator <(const ReverseVectorIterator& rhs)
+		{
+			return (this->ptr_content < rhs.ptr_content);
+		}
+
+		bool operator >(const ReverseVectorIterator& rhs)
+		{
+			return (this->ptr_content > rhs.ptr_content);
+		}
+
+		bool operator <=(const ReverseVectorIterator& rhs)
+		{
+			return (this->ptr_content <= rhs.ptr_content);
+		}
+
+		bool operator >=(const ReverseVectorIterator& rhs)
+		{
+			return (this->ptr_content >= rhs.ptr_content);
 		}
 	};
 
@@ -731,8 +771,9 @@ namespace ft
 		 */
 		iterator insert (iterator position, const value_type& val)
 		{
-			insert(position, 1, val);
-			return (position + 1);
+			difference_type _position_index = position - this->begin();
+			insert(position, (size_type)1, (value_type &)val);
+			return (iterator(&this->at(static_cast<size_type>(_position_index))));
 		}
 
 		/**
@@ -752,8 +793,8 @@ namespace ft
 			if (n <= 0) { return ; }
 			difference_type _position_index = position - this->begin();
 			this->reserve(this->get_new_capacity(this->size() + n));
-			for (size_type index = (this->size() + n); index >= n; --index)
-			 { this->c_container[index] = this->c_container[index - n]; }
+			for (size_type index = (this->size() + n); index > _position_index; --index)
+			 { this->c_container[index] = this->c_container[index - n];  }
 			this->c_len += n;
 			for (size_type index = _position_index; index < _position_index + n; ++index)
 			 { this->c_container[index] = val; }
@@ -771,7 +812,8 @@ namespace ft
 		 * @param first begin of element's range
 		 * @param last end of element's range
 		 */
-		void insert (iterator position, iterator first, iterator last)
+		template<class InputIterator>
+		void insert (iterator position, InputIterator first, InputIterator last)
 		{
 			difference_type _position_index = position - this->begin();
 			difference_type _elements = last - first;
@@ -782,31 +824,6 @@ namespace ft
 			this->c_len += _elements;
 			for (size_type i = _position_index; i < (_position_index + _elements); ++i)
 			 { this->c_container[i] = *(first++); }
-		}
-
-		/**
-		 * Insert elements (const range version)
-		 * The vector is extended by inserting the new elements before the element at the specified position
-		 *
-		 * This causes an automatic reallocation of the allocated storage space if -and only if-\
-		 *   the new vector size surpasses the current vector capacity.
-		 *
-		 * @reference https://www.cplusplus.com/reference/vector/vector/insert/
-		 * @param position position in the vector where the new elements are inserted
-		 * @param first begin of element's range
-		 * @param last end of element's range
-		 */
-		void insert (iterator position, const_iterator first, const_iterator last)
-		{
-			difference_type _position_index = position - this->begin();
-			difference_type _elements = last - first;
-			if (_elements <= 0) { return ; }
-			this->reserve(this->get_new_capacity(this->size() + _elements));
-			for (size_type i = (this->size() + _elements); i >= _elements; --i)
-			{ this->allocator.construct(&this->c_container[i], this->c_container[i - _elements]); }
-			this->c_len += _elements;
-			for (size_type i = _position_index; i < (_position_index + _elements); ++i)
-			{ this->c_container[i] = *(first++); }
 		}
 
 		/**

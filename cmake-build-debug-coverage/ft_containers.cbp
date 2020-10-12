@@ -83,16 +83,34 @@
 		<Unit filename="/Users/louis/42/ft_containers/List/List.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Map/BinarySearchTree.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Map/Less.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Map/Map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Map/MapBinaryTree.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Queue/Queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Stack/Stack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Tests/Tester.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Tests/list.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Tests/list_tests.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/louis/42/ft_containers/Tests/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Vector/Vector.hpp">

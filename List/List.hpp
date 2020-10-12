@@ -2,12 +2,6 @@
 #ifndef FT_CONTAINERS_LIST_HPP
 #define FT_CONTAINERS_LIST_HPP
 
-struct InputIteratorTag {};
-struct OutputIteratorTag {};
-struct ForwardIteratorTag: public InputIteratorTag {};
-struct BidirectionalIteratorTag: public ForwardIteratorTag {};
-struct RandomAccessIteratorTag: public BidirectionalIteratorTag {};
-
 #include <iostream>
 
 namespace ft
@@ -488,11 +482,11 @@ namespace ft
 		iterator end() { return (iterator(this->c_end)); }
 		const_iterator end() const { return (const_iterator(this->c_end)); }
 
-		reverse_iterator rbegin() { return (reverse_iterator(this->c_end->prev)); }
-		const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->c_end->prev)); }
+		reverse_iterator rbegin() { return (reverse_iterator(this->c_begin)); }
+		const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->c_begin)); }
 
-		reverse_iterator rend() { return (reverse_iterator(this->c_begin)); }
-		const_reverse_iterator rend() const { return (const_reverse_iterator(this->c_begin)); }
+		reverse_iterator rend() { return (reverse_iterator(this->c_end)); }
+		const_reverse_iterator rend() const { return (const_reverse_iterator(this->c_end)); }
 
 		/*
 		 * Public functions
@@ -760,8 +754,7 @@ namespace ft
 		 * @param first (Begin of the iterator)
 		 * @param last (End of the iterator)
 		 */
-		template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last)
+		void insert (iterator position, iterator first, iterator last)
 		{
 			while (first != last)
 			{
