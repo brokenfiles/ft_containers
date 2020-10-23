@@ -358,6 +358,7 @@ namespace ft
 		 */
 		Vector (const allocator_type& alloc = allocator_type())
 		{
+			this->allocator = alloc;
 			this->c_len = 0;
 			this->c_capacity = 0;
 			this->c_container = NULL;
@@ -376,6 +377,7 @@ namespace ft
 		Vector (size_type n, const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type())
 		{
+			this->allocator = alloc;
 			this->c_len = 0;
 			this->c_capacity = n;
 			this->c_container = NULL;
@@ -396,6 +398,7 @@ namespace ft
 		Vector (iterator first, iterator last,
 		const allocator_type& alloc = allocator_type())
 		{
+			this->allocator = alloc;
 			this->c_len = 0;
 			this->c_capacity = this->get_new_capacity(last - first);
 			this->c_container = NULL;
@@ -793,10 +796,10 @@ namespace ft
 			if (n <= 0) { return ; }
 			difference_type _position_index = position - this->begin();
 			this->reserve(this->get_new_capacity(this->size() + n));
-			for (size_type index = (this->size() + n); index > _position_index; --index)
+			for (difference_type index = (this->size() + n); index > _position_index; --index)
 			 { this->c_container[index] = this->c_container[index - n];  }
 			this->c_len += n;
-			for (size_type index = _position_index; index < _position_index + n; ++index)
+			for (difference_type index = _position_index; index < _position_index + n; ++index)
 			 { this->c_container[index] = val; }
 		}
 
@@ -819,10 +822,10 @@ namespace ft
 			difference_type _elements = last - first;
 			if (_elements <= 0) { return ; }
 			this->reserve(this->get_new_capacity(this->size() + _elements));
-			for (size_type i = (this->size() + _elements); i >= _elements; --i)
+			for (difference_type i = (this->size() + _elements); i >= _elements; --i)
 			 { this->allocator.construct(&this->c_container[i], this->c_container[i - _elements]); }
 			this->c_len += _elements;
-			for (size_type i = _position_index; i < (_position_index + _elements); ++i)
+			for (difference_type i = _position_index; i < (_position_index + _elements); ++i)
 			 { this->c_container[i] = *(first++); }
 		}
 

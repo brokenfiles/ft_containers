@@ -218,13 +218,13 @@ namespace ft
 		typedef value_type const	const_reference;
 
 	private:
-		node_type		*root;
 		node_type		*begin;
 		node_type		*end;
-		node_type		*len;
-		compare_type	compare;
+		size_type 		len;
 
 	public:
+		node_type		*root;
+		compare_type	compare;
 
 		BST()
 		{
@@ -293,6 +293,30 @@ namespace ft
 				this->insert_from_root();
 			}
 		}
+
+		void delete_from(node_type *node)
+		{
+			if (!node || node == this->get_end())
+				return ;
+			this->delete_from(node->right);
+			this->delete_from(node->left);
+			delete node;
+		}
+
+		void clear()
+		{
+			if (this->size() > 0)
+			{
+				this->delete_from(this->root);
+				this->root = NULL;
+				this->end->top = NULL;
+				this->end->right = NULL;
+				this->end->left = NULL;
+				this->len = 0;
+			}
+		}
+
+
 	};
 }
 #endif

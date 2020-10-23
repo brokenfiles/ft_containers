@@ -469,6 +469,9 @@ namespace ft
 		 */
 		List& operator= (const List& x)
 		{
+			this->c_begin = x.c_begin;
+			this->c_end = x.c_end;
+			this->c_len = x.c_len;
 			return (*this);
 		}
 
