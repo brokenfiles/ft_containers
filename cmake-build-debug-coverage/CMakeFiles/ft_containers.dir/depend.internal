@@ -3,12 +3,13 @@
 
 CMakeFiles/ft_containers.dir/main.cpp.o
  /Users/louis/42/ft_containers/List/List.hpp
- /Users/louis/42/ft_containers/Map/BinarySearchTree.hpp
- /Users/louis/42/ft_containers/Map/Less.hpp
+ /Users/louis/42/ft_containers/Map/BST.hpp
  /Users/louis/42/ft_containers/Map/Map.hpp
  /Users/louis/42/ft_containers/Tests/Tester.hpp
  /Users/louis/42/ft_containers/Tests/list.hpp
  /Users/louis/42/ft_containers/Tests/list_tests.hpp
+ /Users/louis/42/ft_containers/Tests/map.hpp
+ /Users/louis/42/ft_containers/Tests/map_tests.hpp
  /Users/louis/42/ft_containers/Vector/Vector.hpp
  /Users/louis/42/ft_containers/main.cpp
  /Users/louis/42/ft_containers/utils.hpp

@@ -10,35 +10,17 @@
 iostream
 -
 
-/Users/louis/42/ft_containers/Map/BinarySearchTree.hpp
+/Users/louis/42/ft_containers/Map/BST.hpp
 iostream
--
-cstddef
--
-string
--
-stdio.h
--
-limits
--
-memory
--
-iostream
--
-string
--
-
-/Users/louis/42/ft_containers/Map/Less.hpp
+/Users/louis/42/ft_containers/Map/iostream
 
 /Users/louis/42/ft_containers/Map/Map.hpp
 functional
 -
-Less.hpp
-/Users/louis/42/ft_containers/Map/Less.hpp
 ../List/List.hpp
 /Users/louis/42/ft_containers/List/List.hpp
-./BinarySearchTree.hpp
-/Users/louis/42/ft_containers/Map/BinarySearchTree.hpp
+./BST.hpp
+/Users/louis/42/ft_containers/Map/BST.hpp
 
 /Users/louis/42/ft_containers/Tests/Tester.hpp
 cassert
@@ -62,6 +44,16 @@ list_tests.hpp
 Tester.hpp
 /Users/louis/42/ft_containers/Tests/Tester.hpp
 
+/Users/louis/42/ft_containers/Tests/map.hpp
+Tester.hpp
+/Users/louis/42/ft_containers/Tests/Tester.hpp
+map_tests.hpp
+/Users/louis/42/ft_containers/Tests/map_tests.hpp
+
+/Users/louis/42/ft_containers/Tests/map_tests.hpp
+Tester.hpp
+/Users/louis/42/ft_containers/Tests/Tester.hpp
+
 /Users/louis/42/ft_containers/Vector/Vector.hpp
 iostream
 -
@@ -73,17 +65,19 @@ cmath
 /Users/louis/42/ft_containers/main.cpp
 Tests/list.hpp
 /Users/louis/42/ft_containers/Tests/list.hpp
+Tests/map.hpp
+/Users/louis/42/ft_containers/Tests/map.hpp
 List/List.hpp
 /Users/louis/42/ft_containers/List/List.hpp
 Vector/Vector.hpp
 /Users/louis/42/ft_containers/Vector/Vector.hpp
 Map/Map.hpp
 /Users/louis/42/ft_containers/Map/Map.hpp
+Map/BST.hpp
+/Users/louis/42/ft_containers/Map/BST.hpp
 list
 -
 vector
--
-map
 -
 
 /Users/louis/42/ft_containers/utils.hpp
