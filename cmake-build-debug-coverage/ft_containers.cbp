@@ -86,19 +86,10 @@
 		<Unit filename="/Users/louis/42/ft_containers/Map/BST.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/BinarySearchTree.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Map/Less.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Map/Map.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/MapBinaryTree.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/RedBlackTree.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/louis/42/ft_containers/Queue/Queue.hpp">

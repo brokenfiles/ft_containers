@@ -14,12 +14,14 @@ typedef ft::BST<int, std::string>::Node node_type;
 
 int main()
 {
-//	exec_test_list<ft::List<int> >();
+	exec_test_list<ft::List<int> >();
 //	exec_test_list<std::list<int> >();
-//	exec_test_map<ft::Map<int, int> >();
-	exec_test_map<std::map<int, int> >();
-//	map[2] = 10;
-//	std::cout << "upper : " << map.lower_bound(2)->first << std::endl;
+	exec_test_map<ft::Map<int, int> >();
+//	exec_test_map<std::map<int, int> >();
+//	ft::Map<int, int> map;
+//	map[42] = 21;
+//	map[20] = 10;
+//	map[30] = 15;
 //	ft::Map<int, int>::iterator begin = map.begin();
 //	ft::Map<int, int>::iterator end = map.end();
 //	while (begin != end) {

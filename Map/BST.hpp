@@ -9,10 +9,12 @@ namespace ft
 
 	class BST
 	{
-		typedef std::pair<Key, T> value_type;
-		typedef size_t            size_type;
-		typedef Compare           compare_type;
-		typedef Key               key_type;
+	public:
+		typedef size_t                           size_type;
+		typedef Compare                          compare_type;
+		typedef Key                              key_type;
+		typedef T                                mapped_type;
+		typedef std::pair<key_type, mapped_type> value_type;
 
 	public:
 		struct Node
@@ -25,26 +27,10 @@ namespace ft
 
 			Node()
 			{
-				this->_left   = NULL;
-				this->_right  = NULL;
-				this->_parent = NULL;
-			}
-
-			Node(const Node &node)
-			{
-				this->_content = node._content;
-				this->_left    = node._left;
-				this->_right   = node._right;
-				this->_parent  = node._parent;
-			}
-
-			Node &operator=(const Node &rhs)
-			{
-				this->_parent  = rhs._parent;
-				this->_left    = rhs._left;
-				this->_right   = rhs._right;
-				this->_content = rhs._content;
-				return *this;
+				this->_left    = NULL;
+				this->_right   = NULL;
+				this->_parent  = NULL;
+				this->_content = value_type();
 			}
 
 			Node(value_type pair)
@@ -53,6 +39,23 @@ namespace ft
 				this->_left    = NULL;
 				this->_right   = NULL;
 				this->_parent  = NULL;
+			}
+
+			Node(const Node &node)
+			{
+				this->_content = node._content;
+				this->_left    = NULL;
+				this->_right   = NULL;
+				this->_parent  = NULL;
+			}
+
+			Node &operator=(const Node &rhs)
+			{
+				this->_content = rhs._content;
+				this->_parent  = NULL;
+				this->_left    = NULL;
+				this->_right   = NULL;
+				return (*this);
 			}
 
 			Node(value_type pair, Node *left, Node *right, Node *parent)
@@ -452,6 +455,7 @@ namespace ft
 			}
 			node->_right        = this->_end;
 			this->_end->_parent = node;
+			this->_end->_right = NULL;
 		}
 
 		void remove_last_node()
@@ -590,6 +594,8 @@ namespace ft
 			space += COUNT;
 
 			// Process right child first
+//			std::cout << root->_right->getContent().first << std::endl;
+//			return ;
 			print2DUtil(root->_right, space);
 
 			// Print current node after space
@@ -703,86 +709,90 @@ namespace ft
 			return (tmp);
 		}
 
-		node_type *delete_by_pair(node_type *from_node, value_type pair)
+		size_type erase_from_key(const key_type &key)
 		{
-			if (from_node == NULL)
+			node_type *found = find_by_key(_root, key);
+			if (found != NULL)
 			{
-				from_node = this->root();
+				delete_node(this->root(), found->getContent().first);
+				this->increase_size(-1);
+				this->set_tree_bounds();
 			}
-			if (from_node == NULL)
-			{
-				return (NULL);
-			}
-			if (pair < from_node->_content)
-			{
-				from_node->_left = this->delete_by_pair(from_node->_left, pair);
-			}
-			else if (pair > from_node->_content)
-			{
-				from_node->_right = this->delete_by_pair(from_node->_right, pair);
-			}
-			else
-			{
-				if (from_node->_left == NULL)
-				{
-					node_type *tmp = from_node->_left;
-					this->increase_size(-1);
-					delete from_node;
-					return (tmp);
-				}
-				else if (from_node->_right == NULL)
-				{
-					node_type *tmp = from_node->_right;
-					this->increase_size(-1);
-					delete from_node;
-					return (tmp);
-				}
-				node_type *min_value_from_root = this->get_left_value(from_node->_right);
-				from_node->_content.first = min_value_from_root->_content.first;
-				from_node->_right         = delete_by_pair(from_node->_right, min_value_from_root->_content);
-			}
-			return (from_node);
+			return (found != NULL ? 1 : 0);
 		}
 
-		node_type *delete_by_key(node_type *from_node, key_type key)
+		void search_key(node_type *&curr, key_type key, node_type *&parent)
 		{
-			if (from_node == NULL)
+			while (curr != NULL && curr->getContent().first != key)
 			{
-				from_node = this->root();
-			}
-			if (from_node == NULL)
-			{
-				return (NULL);
-			}
-			if (key < from_node->_content.first)
-			{
-				from_node->_left = this->delete_by_key(from_node->_left, key);
-			}
-			else if (key > from_node->_content.first)
-			{
-				from_node->_right = this->delete_by_key(from_node->_right, key);
-			}
-			else
-			{
-				if (from_node->_left == NULL)
+				parent = curr;
+				if (key < curr->getContent().first)
 				{
-					node_type *tmp = from_node->_left;
-					this->increase_size(-1);
-					delete from_node;
-					return (tmp);
+					curr = curr->_left;
 				}
-				else if (from_node->_right == NULL)
+				else
 				{
-					node_type *tmp = from_node->_right;
-					this->increase_size(-1);
-					delete from_node;
-					return (tmp);
+					curr = curr->_right;
 				}
-				node_type *min_value_from_root = this->get_left_value(from_node->_right);
-				from_node->_content.first = min_value_from_root->_content.first;
-				from_node->_right         = delete_by_pair(from_node->_right, min_value_from_root->_content);
 			}
-			return (from_node);
+		}
+
+		node_type *minimum_key(node_type *curr) {
+			while (curr->_left != NULL) {
+				curr = curr->_left;
+			}
+			return (curr);
+		}
+
+		void delete_node(node_type *root, key_type key)
+		{
+			node_type *parent = NULL;
+			node_type *curr   = root;
+			search_key(curr, key, parent);
+
+			if (curr == NULL)
+			{
+				return;
+			}
+
+			if (curr->_left == NULL && curr->_right == NULL)
+			{
+				if (curr != this->root())
+				{
+					if (parent->_left == curr)
+					{
+						parent->_left = NULL;
+					}
+					else
+					{
+						parent->_right = NULL;
+					}
+				}
+				else
+				{
+					this->_root = NULL;
+				}
+				delete curr;
+			}
+			else if (curr->_left && curr->_right)
+			{
+				node_type *successor = minimum_key(curr->_right);
+				value_type val = successor->getContent();
+				delete_node(root, val.first);
+				curr->_content = val;
+			} else {
+				node_type *child = (curr->_left) ? curr->_left : curr->_right;
+				if (curr != root) {
+					if (curr == parent->_left) {
+						parent->_left = child;
+					} else {
+						parent->_right = child;
+					}
+				} else {
+					_root = child;
+				}
+				delete(curr);
+			}
 		}
 
 		void recursive_free(node_type *node)
@@ -830,7 +840,7 @@ namespace ft
 
 		void copyFrom(const BST &x)
 		{
-			if (x.empty() || x._begin == x._end)
+			if (x._len == 0 || x._root == x._end)
 			{
 				return;
 			}
@@ -840,13 +850,42 @@ namespace ft
 				this->copyNextNode(&this->_root->_left, x._root->_left, x._end);
 				this->_root->_left->_parent = this->_root;
 			}
-			if (x._root->_right)
+			if (x._root->_right && x._root->_right != x._end)
 			{
-				this->copyNextNode(&this->_root->_right, x._root->_right, x._end);
+				this->copyNextNode(&_root->_right, x._root->_right, x._end);
 				this->_root->_right->_parent = this->_root;
 			}
 			this->_len  = x._len;
 			this->set_tree_bounds();
+		}
+
+		/*
+		 * Getters
+		 */
+
+		node_type *getBegin() const
+		{
+			return _begin;
+		}
+
+		node_type *getEnd() const
+		{
+			return _end;
+		}
+
+		node_type *getRoot() const
+		{
+			return _root;
+		}
+
+		size_type getLen() const
+		{
+			return _len;
+		}
+
+		compare_type getCompare() const
+		{
+			return _compare;
 		}
 	};
 }

@@ -8,32 +8,32 @@ namespace ft
 	class Map
 	{
 	public:
-		typedef Key                                                 key_type;
-		typedef T                                                   mapped_type;
-		typedef std::pair<const key_type, mapped_type>              value_type;
-		typedef Compare                                             key_compare;
-		typedef Compare                                             value_compare;
-		typedef value_type                                          &reference;
-		typedef const value_type                                    &const_reference;
-		typedef value_type                                          *pointer;
-		typedef const value_type                                    *const_pointer;
-		typedef BST<key_type, mapped_type, key_compare>             bst_type;
-		typedef BST<const key_type, const mapped_type, key_compare> const_bst_type;
-		typedef typename bst_type::Iterator                         iterator;
-		typedef typename const_bst_type::Iterator                   const_iterator;
-		typedef typename bst_type::Iterator                         reverse_iterator;
-		typedef typename const_bst_type::Iterator                   const_reverse_iterator;
-		typedef typename bst_type::Node                             node_type;
-		typedef typename bst_type::Node                             *node_pointer;
-		typedef ptrdiff_t                                           difference_type;
-		typedef size_t                                              size_type;
+		typedef Key                                      key_type;
+		typedef T                                        mapped_type;
+		typedef Compare                                  key_compare;
+		typedef Compare                                  value_compare;
+		typedef BST<key_type, mapped_type,
+				key_compare>                             bst_type;
+		typedef typename bst_type::value_type            value_type;
+		typedef value_type                               &reference;
+		typedef const value_type                         &const_reference;
+		typedef value_type                               *pointer;
+		typedef const value_type                         *const_pointer;
+		typedef typename bst_type::Iterator              iterator;
+		typedef typename bst_type::Iterator        const_iterator;
+		typedef typename bst_type::ReverseIterator       reverse_iterator;
+		typedef typename bst_type::ReverseIterator const_reverse_iterator;
+		typedef typename bst_type::Node                  node_type;
+		typedef typename bst_type::Node                  *node_pointer;
+		typedef ptrdiff_t                                difference_type;
+		typedef size_t                                   size_type;
 
 	private:
 		key_compare _compare;
 		bst_type    _bst;
 
 		template<typename S>
-		void swap(S *t1, S *t2)
+		void swap_t(S *t1, S *t2)
 		{
 			S tmp = *t1;
 			*t1 = *t2;
@@ -81,7 +81,6 @@ namespace ft
 		 */
 		Map(const Map &x)
 		{
-			this->_bst     = bst_type();
 			this->_compare = x._compare;
 			_bst.copyFrom(x._bst);
 		}
@@ -121,7 +120,7 @@ namespace ft
 			return (iterator(_bst.end(), _bst.root()));
 		}
 
-		const_iterator begin() const
+		const_iterator cbegin() const
 		{
 			return (const_iterator(_bst.begin(), _bst.root()));
 		}
@@ -162,7 +161,7 @@ namespace ft
 		 */
 		bool empty() const
 		{
-			return (_bst.empty());
+			return (_bst.getLen() == 0);
 		}
 
 		/**
@@ -210,6 +209,12 @@ namespace ft
 			}
 		}
 
+		void print()
+		{
+			//TODO REmove this
+			_bst.print();
+		}
+
 		/*
 		 * Modifiers
 		 */
@@ -224,7 +229,7 @@ namespace ft
 		 */
 		std::pair<iterator, bool> insert(const value_type &val)
 		{
-			node_pointer found = _bst.find_by_pair(_bst.root(), val);
+			node_pointer found = _bst.find_by_key(_bst.root(), val.first);
 			if (found != NULL)
 			{
 				return (std::make_pair(iterator(found, _bst.root()), false));
@@ -243,12 +248,13 @@ namespace ft
 		 */
 		iterator insert(iterator position, const value_type &val)
 		{
-			node_pointer found = _bst.find_by_pair(_bst.root(), val);
+			(void) position;
+			node_pointer found = _bst.find_by_key(_bst.root(), val.first);
 			if (found != NULL)
 			{
-				return (std::make_pair(iterator(found, _bst.root()), false));
+				return (iterator(found, _bst.root()));
 			}
-			node_pointer new_node = _bst.insert(position._node, val);
+			node_pointer new_node = _bst.insert(val);
 			return (iterator(new_node, _bst.root()));
 		}
 
@@ -264,19 +270,19 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			node_pointer found = _bst.find_by_pair(position._node->_content);
+			node_pointer found = _bst.find_by_key(_bst.root(), position->first);
 			if (found != NULL)
 			{
-				_bst.delete_by_pair(position._node->_content);
+				_bst.erase_from_key(position->first);
 			}
 		}
 
 		size_type erase(const key_type &k)
 		{
-			node_pointer found = _bst.find_by_key(k);
+			node_pointer found = _bst.find_by_key(_bst.root(), k);
 			if (found != NULL)
 			{
-				_bst.delete_by_pair(found->_content);
+				_bst.erase_from_key(k);
 			}
 			return (found != NULL ? 1 : 0);
 		}
@@ -292,15 +298,15 @@ namespace ft
 			{
 				while (first != last)
 				{
-					first = iterator(_bst.delete_by_pair(first._node->_content), first._root);
+					_bst.erase_from_key((first++)->first);
 				}
 			}
 		}
 
 		void swap(Map &x)
 		{
-			this->swap(this->_bst, x._bst);
-			this->swap(this->_compare, x._compare);
+			this->swap_t(&this->_bst, &x._bst);
+			this->swap_t(&this->_compare, &x._compare);
 		}
 
 		void clear()
@@ -320,12 +326,12 @@ namespace ft
 
 		iterator find(const key_type &k)
 		{
-			node_type *found = _bst.find_by_key(k);
+			node_type *found = _bst.find_by_key(_bst.root(), k);
 			if (found)
 			{
-				return (iterator(found, this->root()));
+				return (iterator(found, _bst.root()));
 			}
-			return (iterator(this->end(), this->root()));
+			return (iterator(_bst.end(), _bst.root()));
 		}
 
 		const_iterator find(const key_type &k) const
@@ -376,7 +382,82 @@ namespace ft
 		{
 			return (std::pair<const_iterator, const_iterator>(this->lower_bound(k), this->upper_bound(k)));
 		}
-
-
 	};
+
+	template<class Key, class T, class Compare>
+	bool operator==(Map<Key, T, Compare> &lhs,
+					Map<Key, T, Compare> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+		{
+			return (false);
+		}
+		if (lhs.size() > 0)
+		{
+			typedef typename Map<Key, T, Compare>::iterator iterator;
+			iterator                                        rhs_begin = rhs.begin();
+			for (iterator                                   lhs_begin = lhs.begin();
+				 lhs_begin != lhs.end(); lhs_begin++)
+			{
+				if (lhs_begin->first != rhs_begin->first || lhs_begin->second != rhs_begin->second)
+				{
+					return (false);
+				}
+				rhs_begin++;
+			}
+		}
+		return (true);
+	}
+
+	template<class Key, class T, class Compare>
+	bool operator!=(Map<Key, T, Compare> &lhs,
+					Map<Key, T, Compare> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template<class Key, class T, class Compare>
+	bool operator<(Map<Key, T, Compare> &lhs,
+				   Map<Key, T, Compare> &rhs)
+	{
+		if (rhs.empty() || lhs.empty())
+		{
+			return (lhs.size() < rhs.size());
+		}
+		typedef typename Map<Key, T, Compare>::iterator iterator;
+		iterator                                        rhs_begin = rhs.begin();
+		for (iterator                                   lhs_begin = lhs.begin();
+			 lhs_begin != lhs.end(); lhs_begin++)
+		{
+			if (lhs_begin->first != rhs_begin->first || lhs_begin->second != rhs_begin->second)
+			{
+				return (*lhs_begin < *rhs_begin);
+			}
+			rhs_begin++;
+		}
+		return (lhs.size() < rhs.size());
+	}
+
+	template<class Key, class T, class Compare>
+	bool operator>(Map<Key, T, Compare> &lhs,
+				   Map<Key, T, Compare> &rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template<class Key, class T, class Compare>
+	bool operator<=(Map<Key, T, Compare> &lhs,
+					Map<Key, T, Compare> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template<class Key, class T, class Compare>
+	bool operator>=(Map<Key, T, Compare> &lhs,
+					Map<Key, T, Compare> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+
 }
