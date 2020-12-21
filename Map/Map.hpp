@@ -8,25 +8,25 @@ namespace ft
 	class Map
 	{
 	public:
-		typedef Key                                      key_type;
-		typedef T                                        mapped_type;
-		typedef Compare                                  key_compare;
-		typedef Compare                                  value_compare;
+		typedef Key                                     key_type;
+		typedef T                                       mapped_type;
+		typedef Compare                                 key_compare;
+		typedef Compare                                 value_compare;
 		typedef BST<key_type, mapped_type,
-				key_compare>                             bst_type;
-		typedef typename bst_type::value_type            value_type;
-		typedef value_type                               &reference;
-		typedef const value_type                         &const_reference;
-		typedef value_type                               *pointer;
-		typedef const value_type                         *const_pointer;
-		typedef typename bst_type::Iterator              iterator;
-		typedef typename bst_type::Iterator        const_iterator;
-		typedef typename bst_type::ReverseIterator       reverse_iterator;
-		typedef typename bst_type::ReverseIterator const_reverse_iterator;
-		typedef typename bst_type::Node                  node_type;
-		typedef typename bst_type::Node                  *node_pointer;
-		typedef ptrdiff_t                                difference_type;
-		typedef size_t                                   size_type;
+				key_compare>                            bst_type;
+		typedef typename bst_type::value_type           value_type;
+		typedef value_type                              &reference;
+		typedef const value_type                        &const_reference;
+		typedef value_type                              *pointer;
+		typedef const value_type                        *const_pointer;
+		typedef typename bst_type::Iterator             iterator;
+		typedef typename bst_type::ConstIterator        const_iterator;
+		typedef typename bst_type::ReverseIterator      reverse_iterator;
+		typedef typename bst_type::ConstReverseIterator const_reverse_iterator;
+		typedef typename bst_type::Node                 node_type;
+		typedef typename bst_type::Node                 *node_pointer;
+		typedef ptrdiff_t                               difference_type;
+		typedef size_t                                  size_type;
 
 	private:
 		key_compare _compare;
@@ -120,7 +120,7 @@ namespace ft
 			return (iterator(_bst.end(), _bst.root()));
 		}
 
-		const_iterator cbegin() const
+		const_iterator begin() const
 		{
 			return (const_iterator(_bst.begin(), _bst.root()));
 		}
@@ -130,24 +130,30 @@ namespace ft
 			return (const_iterator(_bst.end(), _bst.root()));
 		}
 
-		iterator rbegin()
+		reverse_iterator rbegin()
 		{
-			return (reverse_iterator(_bst.begin(), _bst.root()));
+			return (reverse_iterator(_bst.end()->_parent, _bst.root()));
 		}
 
-		iterator rend()
+		reverse_iterator rend()
 		{
-			return (reverse_iterator(_bst.end(), _bst.root()));
+			if (_bst.getBegin() == NULL) {
+				return (reverse_iterator(NULL, _bst.getRoot()));
+			}
+			return (reverse_iterator(_bst.begin()->_left, _bst.root()));
 		}
 
-		const_iterator rbegin() const
+		const_reverse_iterator rbegin() const
 		{
-			return (const_reverse_iterator(_bst.begin(), _bst.root()));
+			return (const_reverse_iterator(_bst.end()->_left, _bst.root()));
 		}
 
-		const_iterator rend() const
+		const_reverse_iterator rend() const
 		{
-			return (const_reverse_iterator(_bst.end(), _bst.root()));
+			if (_bst.getBegin() == NULL) {
+				return (const_reverse_iterator(NULL, _bst.getRoot()));
+			}
+			return (const_reverse_iterator(_bst.begin()->_left, _bst.root()));
 		}
 
 		/*
@@ -197,7 +203,7 @@ namespace ft
 		 */
 		mapped_type &operator[](const key_type &k)
 		{
-			node_pointer found = _bst.find_by_key(NULL, k);
+			node_pointer found = _bst.find_by_key(_bst.root(), k);
 			if (found != NULL)
 			{
 				return (found->_content.second);

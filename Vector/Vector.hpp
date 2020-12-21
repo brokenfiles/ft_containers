@@ -2,341 +2,47 @@
 #include <cmath>
 #include "../utils.hpp"
 
+# include "VectorIterators.hpp"
+
 namespace ft
 {
-	template<typename T>
-	class VectorIterator
-	{
-	public:
-		typedef T							value_type;
-		typedef T&							reference;
-		typedef T*							pointer;
-		typedef std::ptrdiff_t				difference_type;
-
-	private:
-		pointer	ptr_content;
-
-	public:
-
-		VectorIterator(void)
-		{ ptr_content = NULL; }
-
-		VectorIterator(pointer ptr_content)
-		{ this->ptr_content = ptr_content; }
-
-		VectorIterator(const VectorIterator &x)
-		{ this->ptr_content = x.ptr_content; }
-
-		~VectorIterator()
-		{}
-
-		VectorIterator<value_type> &operator=(const VectorIterator<value_type>& rhs)
-		{
-			this->ptr_content = rhs.ptr_content;
-			return (*this);
-		}
-
-		/*
-		 * Arithmetic Operators
-		 */
-
-		VectorIterator<T> &operator++()
-		{
-			this->ptr_content++;
-			return (*this);
-		}
-
-		VectorIterator<T> operator++(int)
-		{
-			VectorIterator<T> it = *this;
-			this->ptr_content++;
-			return (it);
-		}
-
-		VectorIterator<T> &operator--()
-		{
-			this->ptr_content--;
-			return (*this);
-		}
-
-		VectorIterator<T> operator--(int)
-		{
-			VectorIterator<T> it = *this;
-			this->ptr_content--;
-			return (it);
-		}
-
-		VectorIterator<T> operator+(difference_type n)
-		{
-			return (VectorIterator<value_type>(this->ptr_content + n));
-		}
-
-		VectorIterator<T> operator+(VectorIterator<value_type> x)
-		{
-
-			return (this->ptr_content + x.ptr_content);
-		}
-
-		VectorIterator<T> operator-(difference_type n)
-		{
-			return (VectorIterator<value_type>(this->ptr_content - n));
-		}
-
-		difference_type operator-(VectorIterator<value_type> x)
-		{
-			return (this->ptr_content - x.ptr_content);
-		}
-
-		/*
-		 * Member and pointer operators
-		 */
-
-		reference operator[](difference_type x)
-		{
-			return (*(this->ptr_content + x));
-		}
-
-		reference operator*()
-		{
-			return (*(this->ptr_content));
-		}
-
-		/*
-		 * Compound assignment operators
-		 */
-
-		VectorIterator<T> &operator+=(difference_type n)
-		{
-			this->ptr_content += n;
-			return (*this);
-		}
-
-		VectorIterator<T> &operator-=(difference_type n)
-		{
-			this->ptr_content -= n;
-			return (*this);
-		}
-
-		/*
-		 * Equality operators
-		 */
-
-		bool operator==(const VectorIterator& rhs)
-		{
-			return (this->ptr_content == rhs.ptr_content);
-		}
-
-		bool operator!=(const VectorIterator& rhs)
-		{
-			return (this->ptr_content != rhs.ptr_content);
-		}
-
-		bool operator <(const VectorIterator& rhs)
-		{
-			return (this->ptr_content < rhs.ptr_content);
-		}
-
-		bool operator >(const VectorIterator& rhs)
-		{
-			return (this->ptr_content > rhs.ptr_content);
-		}
-
-		bool operator <=(const VectorIterator& rhs)
-		{
-			return (this->ptr_content <= rhs.ptr_content);
-		}
-
-		bool operator >=(const VectorIterator& rhs)
-		{
-			return (this->ptr_content >= rhs.ptr_content);
-		}
-	};
-
-	template<class T>
-	class ReverseVectorIterator
-	{
-	public:
-		typedef T							value_type;
-		typedef T&							reference;
-		typedef T*							pointer;
-		typedef std::ptrdiff_t				difference_type;
-
-	private:
-		pointer	ptr_content;
-
-	public:
-
-		ReverseVectorIterator(void)
-		{ ptr_content = NULL; }
-
-		ReverseVectorIterator(pointer ptr_content)
-		{ this->ptr_content = ptr_content; }
-
-		ReverseVectorIterator(const ReverseVectorIterator &x)
-		{ this->ptr_content = x.ptr_content; }
-
-		~ReverseVectorIterator()
-		{}
-
-		ReverseVectorIterator<value_type> &operator=(const ReverseVectorIterator<value_type>& rhs)
-		{
-			this->ptr_content = rhs.ptr_content;
-			return (*this);
-		}
-
-		/*
-		 * Arithmetic Operators
-		 */
-
-		ReverseVectorIterator<T> &operator++()
-		{
-			this->ptr_content--;
-			return (*this);
-		}
-
-		ReverseVectorIterator<T> operator++(int)
-		{
-			ReverseVectorIterator<T> it = *this;
-			this->ptr_content--;
-			return (it);
-		}
-
-		ReverseVectorIterator<T> &operator--()
-		{
-			this->ptr_content++;
-			return (*this);
-		}
-
-		ReverseVectorIterator<T> operator--(int)
-		{
-			ReverseVectorIterator<T> it = *this;
-			this->ptr_content++;
-			return (it);
-		}
-
-		ReverseVectorIterator<T> operator+(difference_type n)
-		{
-			return (ReverseVectorIterator<value_type>(this->ptr_content - n));
-		}
-
-		ReverseVectorIterator<T> operator+(ReverseVectorIterator<value_type> x)
-		{
-			return (ReverseVectorIterator<value_type>(this->ptr_content - x.ptr_content));
-		}
-
-		ReverseVectorIterator<T> operator-(difference_type n)
-		{
-			return (ReverseVectorIterator<value_type>(this->ptr_content - n));
-		}
-
-		difference_type operator-(ReverseVectorIterator<value_type> x)
-		{
-			return (this->ptr_content - x.ptr_content);
-		}
-
-		/*
-		 * Member and pointer operators
-		 */
-
-		reference operator[](difference_type x)
-		{
-			return (*(this->ptr_content + x));
-		}
-
-		reference operator*()
-		{
-			return (*(this->ptr_content));
-		}
-
-		/*
-		 * Compound assignment operators
-		 */
-
-		ReverseVectorIterator<T> &operator+=(difference_type n)
-		{
-			this->ptr_content -= n;
-			return (*this);
-		}
-
-		ReverseVectorIterator<T> &operator-=(difference_type n)
-		{
-			this->ptr_content += n;
-			return (*this);
-		}
-
-		/*
-		 * Equality operators
-		 */
-
-		bool operator==(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content == rhs.ptr_content);
-		}
-
-		bool operator!=(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content != rhs.ptr_content);
-		}
-
-		bool operator <(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content < rhs.ptr_content);
-		}
-
-		bool operator >(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content > rhs.ptr_content);
-		}
-
-		bool operator <=(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content <= rhs.ptr_content);
-		}
-
-		bool operator >=(const ReverseVectorIterator& rhs)
-		{
-			return (this->ptr_content >= rhs.ptr_content);
-		}
-	};
 
 	template<class T, class Allocator = std::allocator<T> >
-	class Vector {
+	class Vector
+	{
 	public:
-		typedef T									value_type;
-		typedef Allocator							allocator_type;
-
-		typedef T&									reference;
-		typedef const T&							const_reference;
-		typedef T*									pointer;
-		typedef const T*							const_pointer;
-
-		typedef VectorIterator<T>					iterator;
-		typedef VectorIterator<const T>				const_iterator;
-		typedef ReverseVectorIterator<T>			reverse_iterator;
-		typedef ReverseVectorIterator<const T>		const_reverse_iterator;
-
-		typedef ptrdiff_t							difference_type;
-		typedef size_t								size_type;
+		typedef T         value_type;
+		typedef Allocator allocator_type;
+		typedef T       &reference;
+		typedef const T &const_reference;
+		typedef T       *pointer;
+		typedef const T *const_pointer;
+		typedef VectorIterator<T>                   iterator;
+		typedef ConstVectorIterator<T>        const_iterator;
+		typedef ReverseVectorIterator<T>            reverse_iterator;
+		typedef ConstReverseVectorIterator<T> const_reverse_iterator;
+		typedef ptrdiff_t                           difference_type;
+		typedef size_t                              size_type;
 
 	protected:
-		T*				c_container;
-		size_type		c_len;
-		size_type		c_capacity;
-		allocator_type	allocator;
+		T *c_container;
+		size_type      c_len;
+		size_type      c_capacity;
+		allocator_type allocator;
 
 	private:
 		size_type get_new_capacity(size_type requested_capacity)
 		{
 			size_type new_cap = 0;
-			size_type power = 0;
+			size_type power   = 0;
 			while (new_cap < requested_capacity)
-			 { new_cap = pow(2, power++); }
+			{ new_cap = pow(2, power++); }
 			return (new_cap);
 		}
 
 		void realloc(size_type previous_capacity)
 		{
-			T* new_container;
+			T *new_container;
 			new_container = this->allocator.allocate(this->c_capacity);
 			for (size_type i = 0; i < this->size(); ++i)
 			{
@@ -356,11 +62,11 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param alloc Allocator
 		 */
-		Vector (const allocator_type& alloc = allocator_type())
+		Vector(const allocator_type &alloc = allocator_type())
 		{
-			this->allocator = alloc;
-			this->c_len = 0;
-			this->c_capacity = 0;
+			this->allocator   = alloc;
+			this->c_len       = 0;
+			this->c_capacity  = 0;
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 		}
@@ -374,12 +80,12 @@ namespace ft
 		 * @param val the value to copy n times in the container
 		 * @param alloc allocator
 		 */
-		Vector (size_type n, const value_type& val = value_type(),
-				const allocator_type& alloc = allocator_type())
+		Vector(size_type n, const value_type &val = value_type(),
+			   const allocator_type &alloc = allocator_type())
 		{
-			this->allocator = alloc;
-			this->c_len = 0;
-			this->c_capacity = n;
+			this->allocator   = alloc;
+			this->c_len       = 0;
+			this->c_capacity  = n;
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 			this->assign(n, val);
@@ -395,12 +101,12 @@ namespace ft
 		 * @param last iterator (end of the range)
 		 * @param alloc allocator
 		 */
-		Vector (iterator first, iterator last,
-		const allocator_type& alloc = allocator_type())
+		Vector(iterator first, iterator last,
+			   const allocator_type &alloc = allocator_type())
 		{
-			this->allocator = alloc;
-			this->c_len = 0;
-			this->c_capacity = this->get_new_capacity(last - first);
+			this->allocator   = alloc;
+			this->c_len       = 0;
+			this->c_capacity  = this->get_new_capacity(last - first);
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 			this->assign(first, last);
@@ -413,10 +119,10 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param x other vector
 		 */
-		Vector (const Vector& x)
+		Vector(const Vector &x)
 		{
-			this->c_len = 0;
-			this->c_capacity = x.capacity();
+			this->c_len       = 0;
+			this->c_capacity  = x.capacity();
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 			this->assign(x.begin(), x.end());
@@ -442,7 +148,7 @@ namespace ft
 		 * @param x another Vector object to copy
 		 * @return this instance
 		 */
-		Vector& operator= (const Vector& x)
+		Vector &operator=(const Vector &x)
 		{
 			this->assign(x.begin(), x.end());
 			return (*this);
@@ -452,17 +158,29 @@ namespace ft
 		 * Iterators
 		 */
 
-		iterator begin() { return (iterator(&this->at(0))); }
-		const_iterator begin() const { return (const_iterator(&this->at(0))); }
+		iterator begin()
+		{ return (iterator(&this->at(0))); }
 
-		iterator end() { return (iterator(&this->at(this->size()))); }
-		const_iterator end() const { return (const_iterator(&this->at(this->size()))); }
+		const_iterator begin() const
+		{ return (const_iterator(&this->at(0))); }
 
-		reverse_iterator rbegin() { return (reverse_iterator(&this->at(0))); }
-		const_reverse_iterator rbegin() const { return (const_reverse_iterator(&this->at(0))); }
+		iterator end()
+		{ return (iterator(&this->at(this->size()))); }
 
-		reverse_iterator rend() { return (reverse_iterator(&this->at(this->size()))); }
-		const_reverse_iterator rend() const { return (reverse_iterator(&this->at(this->size()))); }
+		const_iterator end() const
+		{ return (const_iterator(&this->at(this->size()))); }
+
+		reverse_iterator rbegin()
+		{ return (reverse_iterator(&this->at(this->size() - 1))); }
+
+		const_reverse_iterator rbegin() const
+		{ return (const_reverse_iterator(&this->at(this->size() - 1))); }
+
+		reverse_iterator rend()
+		{ return (reverse_iterator(&this->at(-1))); }
+
+		const_reverse_iterator rend() const
+		{ return (reverse_iterator(&this->at(-1))); }
 
 		/*
 		 * Capacity
@@ -507,13 +225,14 @@ namespace ft
 		 * @param n new container size
 		 * @param val new value of the elements
 		 */
-		void resize (size_type n, value_type val = value_type())
+		void resize(size_type n, value_type val = value_type())
 		{
-			if ((int)n < 0) { return ; }
+			if ((int) n < 0)
+			{ return; }
 			if (n < this->size())
-			 { this->erase(this->begin() + n, this->end()); }
+			{ this->erase(this->begin() + n, this->end()); }
 			else if (n > this->size())
-			 { this->insert(this->end(), n - this->size(), val); }
+			{ this->insert(this->end(), n - this->size(), val); }
 		}
 
 		/**
@@ -554,12 +273,12 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/reserve/
 		 * @param n the minimum capacity for the vector
 		 */
-		void reserve (size_type n)
+		void reserve(size_type n)
 		{
 			if (n > this->capacity())
 			{
 				if (n > this->max_size())
-					throw(std::length_error("new requested size is upper than the max size"));
+					throw (std::length_error("new requested size is upper than the max size"));
 				size_type previous_capacity = this->c_capacity;
 				this->c_capacity = n;
 				this->realloc(previous_capacity);
@@ -579,7 +298,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		reference operator[] (size_type n)
+		reference operator[](size_type n)
 		{
 			return (this->at(n));
 		}
@@ -593,7 +312,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		const_reference operator[] (size_type n) const
+		const_reference operator[](size_type n) const
 		{
 			return (this->at(n));
 		}
@@ -608,7 +327,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		reference at (size_type n)
+		reference at(size_type n)
 		{
 			return (*(this->c_container + n));
 		}
@@ -622,7 +341,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		const_reference at (size_type n) const
+		const_reference at(size_type n) const
 		{
 			return (*(this->c_container + n));
 		}
@@ -688,7 +407,7 @@ namespace ft
 		 * @param first begin of the range
 		 * @param last end of the range
 		 */
-		void assign (iterator first, iterator last)
+		void assign(iterator first, iterator last)
 		{
 			this->clear();
 			while (first != last)
@@ -707,7 +426,7 @@ namespace ft
 		 * @param first begin of the range
 		 * @param last end of the range
 		 */
-		void assign (const_iterator first, const_iterator last)
+		void assign(const_iterator first, const_iterator last)
 		{
 			this->clear();
 			while (first != last)
@@ -726,11 +445,11 @@ namespace ft
 		 * @param n new size of the container
 		 * @param val value to fill container with
 		 */
-		void assign (size_type n, const value_type& val)
+		void assign(size_type n, const value_type &val)
 		{
 			this->clear();
 			for (size_type i = 0; i < n; ++i)
-			 { push_back(val); }
+			{ push_back(val); }
 		}
 
 		/**
@@ -740,14 +459,14 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/push_back/
 		 * @param val value to be copied
 		 */
-		void push_back (const value_type& val)
+		void push_back(const value_type &val)
 		{
 			// make request to reserve some space
 			if (this->size() + 1 > this->capacity())
-			 { this->reserve(get_new_capacity(this->size() + 1)); }
+			{ this->reserve(get_new_capacity(this->size() + 1)); }
 			// pushwing value
 			this->c_container[this->size()] = val;
-			this->c_len ++;
+			this->c_len++;
 		}
 
 		/**
@@ -772,10 +491,10 @@ namespace ft
 		 * @param val value to be copied
 		 * @return an iterator that points to the first of the newly inserted element
 		 */
-		iterator insert (iterator position, const value_type& val)
+		iterator insert(iterator position, const value_type &val)
 		{
 			difference_type _position_index = position - this->begin();
-			insert(position, (size_type)1, (value_type &)val);
+			insert(position, (size_type) 1, (value_type &) val);
 			return (iterator(&this->at(static_cast<size_type>(_position_index))));
 		}
 
@@ -791,16 +510,17 @@ namespace ft
 		 * @param n number of elements to insert
 		 * @param val value to be copied
 		 */
-		void insert (iterator position, size_type n, const value_type& val)
+		void insert(iterator position, size_type n, const value_type &val)
 		{
-			if (n <= 0) { return ; }
+			if (n <= 0)
+			{ return; }
 			difference_type _position_index = position - this->begin();
 			this->reserve(this->get_new_capacity(this->size() + n));
 			for (difference_type index = (this->size() + n); index > _position_index; --index)
-			 { this->c_container[index] = this->c_container[index - n];  }
+			{ this->c_container[index] = this->c_container[index - n]; }
 			this->c_len += n;
 			for (difference_type index = _position_index; index < _position_index + n; ++index)
-			 { this->c_container[index] = val; }
+			{ this->c_container[index] = val; }
 		}
 
 		/**
@@ -816,17 +536,18 @@ namespace ft
 		 * @param last end of element's range
 		 */
 		template<class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last)
+		void insert(iterator position, InputIterator first, InputIterator last)
 		{
 			difference_type _position_index = position - this->begin();
-			difference_type _elements = last - first;
-			if (_elements <= 0) { return ; }
+			difference_type _elements       = last - first;
+			if (_elements <= 0)
+			{ return; }
 			this->reserve(this->get_new_capacity(this->size() + _elements));
 			for (difference_type i = (this->size() + _elements); i >= _elements; --i)
-			 { this->allocator.construct(&this->c_container[i], this->c_container[i - _elements]); }
+			{ this->allocator.construct(&this->c_container[i], this->c_container[i - _elements]); }
 			this->c_len += _elements;
 			for (difference_type i = _position_index; i < (_position_index + _elements); ++i)
-			 { this->c_container[i] = *(first++); }
+			{ this->c_container[i] = *(first++); }
 		}
 
 		/**
@@ -839,12 +560,12 @@ namespace ft
 		 * @param position iterator pointing to a single element to be removed
 		 * @return an iterator pointing to the new location of the last element erased
 		 */
-		iterator erase (iterator position)
+		iterator erase(iterator position)
 		{
 			difference_type _pos_index = position - this->begin() - 1;
-			for (size_type index = _pos_index; index < this->size() - 1; index ++)
-			 { this->c_container[index] = this->c_container[index + 1]; }
-			this->c_len --;
+			for (size_type  index      = _pos_index; index < this->size() - 1; index++)
+			{ this->c_container[index] = this->c_container[index + 1]; }
+			this->c_len--;
 			return (position + 1);
 		}
 
@@ -859,14 +580,14 @@ namespace ft
 		 * @param last end of the range
 		 * @return an iterator pointing to the new location of the last element erased
 		 */
-		iterator erase (iterator first, iterator last)
+		iterator erase(iterator first, iterator last)
 		{
 			difference_type _first_index = first - this->begin();
-			difference_type _last_index  = last  - this->begin();
+			difference_type _last_index  = last - this->begin();
 			difference_type _elements    = last - first;
 
-			for ( ; _first_index < _last_index; ++_first_index)
-			 { this->c_container[_first_index] = this->c_container[_first_index + _elements]; }
+			for (; _first_index < _last_index; ++_first_index)
+			{ this->c_container[_first_index] = this->c_container[_first_index + _elements]; }
 			this->c_len -= _elements;
 			return (iterator(this->c_container + _first_index));
 		}
@@ -878,7 +599,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/swap/
 		 * @param x another vector
 		 */
-		void swap (Vector& x)
+		void swap(Vector &x)
 		{
 			ft::swap(this->c_len, x.c_len);
 			ft::swap(this->c_container, x.c_container);
@@ -893,7 +614,7 @@ namespace ft
 		 */
 		void clear()
 		{
-			if (! this->empty())
+			if (!this->empty())
 				this->erase(this->begin(), this->end());
 		}
 
@@ -917,11 +638,11 @@ namespace ft
 	bool operator==(const Vector<T> &lhs, const Vector<T> &rhs)
 	{
 		if (lhs.size() != rhs.size())
-		 { return (false); }
+		{ return (false); }
 		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
 		{
 			if (lhs[i] != rhs[i])
-			 { return false; }
+			{ return false; }
 		}
 		return (true);
 	}
@@ -930,13 +651,13 @@ namespace ft
 	bool operator<(const Vector<T> &lhs, const Vector<T> &rhs)
 	{
 		if (lhs.size() < rhs.size())
-		 { return true; }
+		{ return true; }
 		if (lhs.size() > rhs.size())
-		 { return false; }
+		{ return false; }
 		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
 		{
 			if (lhs[i] > rhs[i])
-			 { return (false); }
+			{ return (false); }
 		}
 		return (true);
 	}

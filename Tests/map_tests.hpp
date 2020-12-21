@@ -72,14 +72,26 @@ void iterators_tests()
 	map[45]                              = 32;
 	map[21]                              = 45;
 	typedef typename Map::iterator iterator;
-//	typedef typename Map::const_iterator const_iterator;
+	typedef typename Map::const_iterator const_iterator;
+	typedef typename Map::reverse_iterator reverse_iterator;
+	typedef typename Map::const_reverse_iterator const_reverse_iterator;
 	iterator                       begin = map.begin();
-//	const_iterator cbegin = map.cbegin();
-//	assert(cbegin->first == 21 && cbegin->second == 45);
 	assert(begin->first == 21 && begin->second == 45);
 	begin++;
 	assert(begin->first == 45 && begin->second == 32);
-	//todo test const iterator
+	const_iterator cbegin = map.begin();
+	assert(cbegin->first == 21 && cbegin->second == 45);
+	cbegin++;
+	assert(cbegin->first == 45 && cbegin->second == 32);
+	reverse_iterator rbegin = map.rbegin();
+	assert(rbegin->first == 45 && rbegin->second == 32);
+	rbegin++;
+	assert(rbegin->first == 21 && rbegin->second == 45);
+	const_reverse_iterator crbegin = map.rbegin();
+	assert(crbegin->first == 45 && crbegin->second == 32);
+	crbegin++;
+	assert(crbegin->first == 21 && crbegin->second == 45);
+
 }
 
 template<class Map>

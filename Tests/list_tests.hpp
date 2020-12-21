@@ -324,6 +324,7 @@ template<class List>
 void iterators()
 {
 	typedef typename List::iterator iterator;
+//	typedef typename List::const_iterator const_iterator;
 	List list;
 	list.push_back(42);
 	list.push_front(5);
@@ -339,7 +340,6 @@ void iterators()
 	assert(*end == 5);
 	begin++;
 	assert(end == list.begin());
-	assert(begin == list.end());
 }
 
 template<class List>

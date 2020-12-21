@@ -10,11 +10,12 @@ namespace ft
 	class BST
 	{
 	public:
-		typedef size_t                           size_type;
-		typedef Compare                          compare_type;
-		typedef Key                              key_type;
-		typedef T                                mapped_type;
-		typedef std::pair<key_type, mapped_type> value_type;
+		typedef size_t                                       size_type;
+		typedef Compare                                      compare_type;
+		typedef Key                                          key_type;
+		typedef T                                            mapped_type;
+		typedef std::pair<const key_type, mapped_type>       value_type;
+		typedef std::pair<const key_type, const mapped_type> const_value_type;
 
 	public:
 		struct Node
@@ -27,43 +28,38 @@ namespace ft
 
 			Node()
 			{
-				this->_left    = NULL;
-				this->_right   = NULL;
-				this->_parent  = NULL;
-				this->_content = value_type();
+				this->_left   = NULL;
+				this->_right  = NULL;
+				this->_parent = NULL;
 			}
 
-			Node(value_type pair)
+			Node(value_type pair) : _content(pair)
 			{
-				this->_content = pair;
-				this->_left    = NULL;
-				this->_right   = NULL;
-				this->_parent  = NULL;
+				this->_left   = NULL;
+				this->_right  = NULL;
+				this->_parent = NULL;
 			}
 
-			Node(const Node &node)
+			Node(const Node &node) : _content(node._content)
 			{
-				this->_content = node._content;
-				this->_left    = NULL;
-				this->_right   = NULL;
-				this->_parent  = NULL;
+				this->_left   = NULL;
+				this->_right  = NULL;
+				this->_parent = NULL;
 			}
 
 			Node &operator=(const Node &rhs)
 			{
-				this->_content = rhs._content;
-				this->_parent  = NULL;
-				this->_left    = NULL;
-				this->_right   = NULL;
+				this->_parent = rhs._parent;
+				this->_left   = rhs._left;
+				this->_right  = rhs._right;
 				return (*this);
 			}
 
-			Node(value_type pair, Node *left, Node *right, Node *parent)
+			Node(value_type pair, Node *left, Node *right, Node *parent) : _content(pair)
 			{
-				this->_content = pair;
-				this->_left    = left;
-				this->_right   = right;
-				this->_parent  = parent;
+				this->_left   = left;
+				this->_right  = right;
+				this->_parent = parent;
 			}
 
 			/**
@@ -74,7 +70,9 @@ namespace ft
 			{
 				return this->_content;
 			}
+
 		};
+		class ConstIterator;
 		class Iterator
 		{
 			typedef Node node_type;
@@ -207,6 +205,7 @@ namespace ft
 						this->_node = this->_node->_right;
 					}
 				}
+				return (*this);
 			}
 
 			Iterator operator--(int)
@@ -220,6 +219,22 @@ namespace ft
 			{
 				return (this->_node);
 			}
+
+			Iterator(const ConstIterator &x)
+			{
+				this->_root = x._root;
+				this->_root = x._node;
+			}
+
+			Iterator &operator=(const ConstIterator &x)
+			{
+				this->_root = x._root;
+				this->_node = x._node;
+				return (*this);
+			}
+
+			operator ConstIterator()
+			{ return (ConstIterator(this->_node, this->_root)); }
 
 			/*
 			 * Comparison operators
@@ -245,6 +260,195 @@ namespace ft
 				return !(_node < rhs._node);
 			}
 		};
+		class ConstIterator
+		{
+			typedef Node node_type;
+
+		public:
+			node_type *_root;
+			node_type *_node;
+
+			ConstIterator()
+			{
+				this->_root = NULL;
+				this->_node = NULL;
+			}
+
+			ConstIterator(node_type *node, node_type *root)
+			{
+				this->_root = root;
+				this->_node = node;
+			}
+
+			ConstIterator(const ConstIterator &rhs)
+			{
+				this->_root = rhs._root;
+				this->_node = rhs._node;
+			}
+
+			ConstIterator &operator=(const ConstIterator &rhs)
+			{
+				this->_node = rhs._node;
+				this->_root = rhs._root;
+				return (*this);
+			}
+
+			virtual ~ConstIterator()
+			{}
+
+			ConstIterator(const Iterator &x)
+			{
+				this->_root = x._root;
+				this->_root = x._node;
+			}
+
+			ConstIterator &operator=(const Iterator &x)
+			{
+				this->_root = x._root;
+				this->_node = x._node;
+				return (*this);
+			}
+
+			operator Iterator()
+			{ return (Iterator(this->_node, this->_root)); }
+
+			/*
+			 * Access to pair by operators
+			 */
+
+			/**
+			 * Get the current node value
+			 * @return value_type
+			 */
+			const value_type &operator*()
+			{
+				return (this->_node->getContent());
+			}
+
+			/**
+			 * Get the current node value address
+			 * @return value_type
+			 */
+			const value_type *operator->()
+			{
+				return (&this->_node->getContent());
+			}
+
+			/*
+			 * Operators
+			 */
+
+			bool operator==(const ConstIterator &rhs)
+			{
+				return (this->_node == rhs._node);
+			}
+
+			bool operator!=(const ConstIterator &rhs)
+			{
+				return (this->_node != rhs._node);
+			}
+
+			ConstIterator &operator++()
+			{
+				if (this->_node->_right)
+				{
+					this->_node = this->_node->_right;
+					while (this->_node->_left)
+					{
+						this->_node = this->_node->_left;
+					}
+					return (*this);
+				}
+				else
+				{
+					node_type *n = this->_node;
+					this->_node = n->_parent;
+					while (this->_node->_left != n)
+					{
+						n = this->_node;
+						this->_node = this->_node->_parent;
+					}
+					return (*this);
+				}
+			}
+
+			ConstIterator operator++(int)
+			{
+				ConstIterator tmp = *this;
+				operator++();
+				return (tmp);
+			}
+
+			ConstIterator &operator--()
+			{
+				if (this->_node)
+				{
+					if (this->_node->_left)
+					{
+						this->_node = this->_node->_left;
+						while (this->_node && this->_node->_right)
+						{
+							this->_node = this->_node->_right;
+						}
+					}
+					else
+					{
+						node_type *n = this->_node;
+						while (this->_node && this->_node->_right != n)
+						{
+							n = this->_node;
+							this->_node = this->_node->_parent;
+						}
+					}
+				}
+				else
+				{
+					this->_node = this->_root;
+					while (this->_node && this->_node->_right)
+					{
+						this->_node = this->_node->_right;
+					}
+				}
+				return (*this);
+			}
+
+			ConstIterator operator--(int)
+			{
+				ConstIterator tmp = *this;
+				operator--();
+				return (tmp);
+			}
+
+			node_type *getNode() const
+			{
+				return (this->_node);
+			}
+
+			/*
+			 * Comparison operators
+			 */
+
+			bool operator<(const ConstIterator &rhs) const
+			{
+				return _node < rhs._node;
+			}
+
+			bool operator>(const ConstIterator &rhs) const
+			{
+				return rhs._node < _node;
+			}
+
+			bool operator<=(const ConstIterator &rhs) const
+			{
+				return !(rhs._node < _node);
+			}
+
+			bool operator>=(const ConstIterator &rhs) const
+			{
+				return !(_node < rhs._node);
+			}
+		};
+		class ConstReverseIterator;
 		class ReverseIterator
 		{
 			typedef Node node_type;
@@ -279,6 +483,22 @@ namespace ft
 
 			virtual ~ReverseIterator()
 			{}
+
+			ReverseIterator(const ConstReverseIterator &x)
+			{
+				this->_root = x._root;
+				this->_root = x._node;
+			}
+
+			ReverseIterator &operator=(const ConstReverseIterator &x)
+			{
+				this->_root = x._root;
+				this->_node = x._node;
+				return (*this);
+			}
+
+			operator ConstReverseIterator()
+			{ return (ConstReverseIterator(this->_node, this->_root)); }
 
 			/*
 			 * Access to pair by operators
@@ -377,6 +597,7 @@ namespace ft
 						this->_node = this->_node->_right;
 					}
 				}
+				return (*this);
 			}
 
 			ReverseIterator operator++(int)
@@ -415,6 +636,193 @@ namespace ft
 				return !(_node < rhs._node);
 			}
 		};
+		class ConstReverseIterator
+		{
+			typedef Node node_type;
+		public:
+			node_type *_root;
+			node_type *_node;
+
+			ConstReverseIterator()
+			{
+				this->_root = NULL;
+				this->_node = NULL;
+			}
+
+			ConstReverseIterator(node_type *node, node_type *root)
+			{
+				this->_root = root;
+				this->_node = node;
+			}
+
+			ConstReverseIterator(const ConstReverseIterator &rhs)
+			{
+				this->_root = rhs._root;
+				this->_node = rhs._node;
+			}
+
+			ConstReverseIterator &operator=(const ConstReverseIterator &rhs)
+			{
+				this->_node = rhs._node;
+				this->_root = rhs._root;
+				return (*this);
+			}
+
+			virtual ~ConstReverseIterator()
+			{}
+
+			ConstReverseIterator(const ReverseIterator &x)
+			{
+				this->_root = x._root;
+				this->_root = x._node;
+			}
+
+			ConstReverseIterator &operator=(const ReverseIterator &x)
+			{
+				this->_root = x._root;
+				this->_node = x._node;
+				return (*this);
+			}
+
+			operator ReverseIterator()
+			{ return (ReverseIterator(this->_node, this->_root)); }
+
+			/*
+			 * Access to pair by operators
+			 */
+
+			/**
+			 * Get the current node value
+			 * @return value_type
+			 */
+			const value_type &operator*()
+			{
+				return (this->_node->getContent());
+			}
+
+			/**
+			 * Get the current node value address
+			 * @return value_type
+			 */
+			const value_type *operator->()
+			{
+				return (&this->_node->getContent());
+			}
+
+			/*
+			 * Operators
+			 */
+
+			bool operator==(const ConstReverseIterator &rhs)
+			{
+				return (this->_node == rhs._node);
+			}
+
+			bool operator!=(const ConstReverseIterator &rhs)
+			{
+				return (this->_node != rhs._node);
+			}
+
+			ConstReverseIterator &operator--()
+			{
+				if (this->_node->_right)
+				{
+					this->_node = this->_node->_right;
+					while (this->_node->_left)
+					{
+						this->_node = this->_node->_left;
+					}
+					return (*this);
+				}
+				else
+				{
+					node_type *n = this->_node;
+					this->_node = n->_parent;
+					while (this->_node->_left != n)
+					{
+						n = this->_node;
+						this->_node = this->_node->_parent;
+					}
+					return (*this);
+				}
+			}
+
+			ConstReverseIterator operator--(int)
+			{
+				Iterator tmp = *this;
+				operator--();
+				return (tmp);
+			}
+
+			ConstReverseIterator &operator++()
+			{
+				if (this->_node)
+				{
+					if (this->_node->_left)
+					{
+						this->_node = this->_node->_left;
+						while (this->_node && this->_node->_right)
+						{
+							this->_node = this->_node->_right;
+						}
+					}
+					else
+					{
+						node_type *n = this->_node;
+						while (this->_node && this->_node->_right != n)
+						{
+							n = this->_node;
+							this->_node = this->_node->_parent;
+						}
+					}
+				}
+				else
+				{
+					this->_node = this->_root;
+					while (this->_node && this->_node->_right)
+					{
+						this->_node = this->_node->_right;
+					}
+				}
+				return (*this);
+			}
+
+			ConstReverseIterator operator++(int)
+			{
+				ConstReverseIterator tmp = *this;
+				operator++();
+				return (tmp);
+			}
+
+			node_type *getNode() const
+			{
+				return (this->_node);
+			}
+
+			/*
+			 * Comparison operators
+			 */
+
+			bool operator<(const ConstReverseIterator &rhs) const
+			{
+				return _node < rhs._node;
+			}
+
+			bool operator>(const ConstReverseIterator &rhs) const
+			{
+				return rhs._node < _node;
+			}
+
+			bool operator<=(const ConstReverseIterator &rhs) const
+			{
+				return !(rhs._node < _node);
+			}
+
+			bool operator>=(const ConstReverseIterator &rhs) const
+			{
+				return !(_node < rhs._node);
+			}
+		};
 		typedef Node node_type;
 
 	private:
@@ -446,7 +854,8 @@ namespace ft
 			{
 				node = node->_left;
 			}
-			this->_begin = node;
+			this->_begin        = node;
+			this->_begin->_left = NULL;
 
 			node = this->_root;
 			while (node->_right)
@@ -455,7 +864,7 @@ namespace ft
 			}
 			node->_right        = this->_end;
 			this->_end->_parent = node;
-			this->_end->_right = NULL;
+			this->_end->_right  = NULL;
 		}
 
 		void remove_last_node()
@@ -624,10 +1033,6 @@ namespace ft
 		{
 			if (from_node == NULL)
 			{
-				from_node = this->root();
-			}
-			if (from_node == NULL)
-			{
 				return (NULL);
 			}
 			while (from_node != NULL)
@@ -678,7 +1083,7 @@ namespace ft
 
 		T &get_value_from_key(Key k)
 		{
-			node_type *node = this->find_by_key(NULL, k);
+			node_type *node = this->find_by_key(_root, k);
 			if (node)
 			{
 				return (node->_content.second);
@@ -716,7 +1121,7 @@ namespace ft
 			{
 				delete_node(this->root(), found->getContent().first);
 				this->increase_size(-1);
-				this->set_tree_bounds();
+				set_tree_bounds();
 			}
 			return (found != NULL ? 1 : 0);
 		}
@@ -737,8 +1142,10 @@ namespace ft
 			}
 		}
 
-		node_type *minimum_key(node_type *curr) {
-			while (curr->_left != NULL) {
+		node_type *minimum_key(node_type *curr)
+		{
+			while (curr->_left != NULL)
+			{
 				curr = curr->_left;
 			}
 			return (curr);
@@ -776,22 +1183,32 @@ namespace ft
 			}
 			else if (curr->_left && curr->_right)
 			{
-				node_type *successor = minimum_key(curr->_right);
-				value_type val = successor->getContent();
+				node_type  *successor = minimum_key(curr->_right);
+				value_type val        = successor->getContent();
 				delete_node(root, val.first);
-				curr->_content = val;
-			} else {
+//				curr->setContent(val);
+//				curr->_content = val;
+				curr->_content.second = val.second;
+			}
+			else
+			{
 				node_type *child = (curr->_left) ? curr->_left : curr->_right;
-				if (curr != root) {
-					if (curr == parent->_left) {
+				if (curr != root)
+				{
+					if (curr == parent->_left)
+					{
 						parent->_left = child;
-					} else {
+					}
+					else
+					{
 						parent->_right = child;
 					}
-				} else {
+				}
+				else
+				{
 					_root = child;
 				}
-				delete(curr);
+				delete (curr);
 			}
 		}
 
