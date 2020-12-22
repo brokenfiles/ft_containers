@@ -64,45 +64,36 @@ namespace ft
 			this->container.pop_back();
 		}
 
-		container_type &getContainer()
+		friend bool operator==(stack<T, Container> &lhs, stack<T, Container> &rhs)
 		{
-			return container;
+			return (lhs.container == rhs.container);
 		}
+
+		friend bool operator!=(stack<T, Container> &lhs, stack<T, Container> &rhs)
+		{
+			return (lhs.container != rhs.container);
+		}
+
+		friend bool operator<(stack<T, Container> &lhs, stack<T, Container> &rhs)
+		{
+			return (lhs.container < rhs.container);
+		}
+
+		friend bool operator<=(stack<T, Container> &lhs, stack<T, Container> &rhs)
+		{
+			return (lhs.container <= rhs.container);
+		}
+
+		friend bool operator>(stack<T, Container> &lhs, stack<T, Container> &rhs)
+		{
+			return (lhs.container > rhs.container);
+		}
+
+		friend bool operator>=(stack<T, Container> &lhs, stack<T, Container> &rhs)
+		{
+			return (lhs.container >= rhs.container);
+		}
+
 	};
 
-	template<class T, class Container>
-	bool operator==(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() == rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator!=(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() != rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator<(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() < rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator<=(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() <= rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator>(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() > rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator>=(stack<T, Container> &lhs, stack<T, Container> &rhs)
-	{
-		return (lhs.getContainer() >= rhs.getContainer());
-	}
 }

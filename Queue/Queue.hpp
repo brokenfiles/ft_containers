@@ -49,46 +49,35 @@ namespace ft
 		void pop()
 		{ return this->c_container.pop_back(); }
 
-		container_type &getContainer()
+		friend bool operator==(queue<T, Container> &lhs, queue<T, Container> &rhs)
 		{
-			return c_container;
+			return (lhs.c_container == rhs.c_container);
+		}
+
+		friend bool operator>(queue<T, Container> &lhs, queue<T, Container> &rhs)
+		{
+			return (lhs.c_container > rhs.c_container);
+		}
+
+		friend bool operator>=(queue<T, Container> &lhs, queue<T, Container> &rhs)
+		{
+			return (lhs.c_container >= rhs.c_container);
+		}
+
+		friend bool operator<(queue<T, Container> &lhs, queue<T, Container> &rhs)
+		{
+			return (lhs.c_container < rhs.c_container);
+		}
+
+		friend bool operator<=(queue<T, Container> &lhs, queue<T, Container> &rhs)
+		{
+			return (lhs.c_container <= rhs.c_container);
+		}
+
+		friend bool operator!=(queue<T, Container> &lhs, queue<T, Container> &rhs)
+		{
+			return (lhs.c_container != rhs.c_container);
 		}
 
 	};
-
-	template<class T, class Container>
-	bool operator==(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() == rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator>(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() > rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator>=(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() >= rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator<(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() < rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator<=(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() <= rhs.getContainer());
-	}
-
-	template<class T, class Container>
-	bool operator!=(queue<T, Container> &lhs, queue<T, Container> &rhs)
-	{
-		return (lhs.getContainer() != rhs.getContainer());
-	}
 }
