@@ -3,7 +3,7 @@
 namespace ft
 {
 	template <class T, class Container = List<T> >
-	class Queue
+	class queue
 	{
 	public:
 		typedef Container									container_type;
@@ -16,13 +16,13 @@ namespace ft
 		container_type c_container;
 
 	public:
-		Queue (const container_type& ctnr = container_type())
+		queue (const container_type& ctnr = container_type())
 		{ this->c_container = ctnr; }
 
-		Queue operator= (const Queue rhs)
+		queue operator= (const queue rhs)
 				{ this->c_container = rhs.c_container; }
 
-		virtual ~Queue() { }
+		virtual ~queue() { }
 
 		bool empty() const
 		{ return this->c_container.empty(); }
@@ -51,37 +51,37 @@ namespace ft
 	};
 
 	template <class T, class Container>
-	bool operator==(Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator==(queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container == rhs.c_container);
 	}
 
 	template <class T, class Container>
-	bool operator> (Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator> (queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container > rhs.c_container);
 	}
 
 	template <class T, class Container>
-	bool operator>=(Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator>=(queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container >= rhs.c_container);
 	}
 
 	template <class T, class Container>
-	bool operator< (Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator< (queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container < rhs.c_container);
 	}
 
 	template <class T, class Container>
-	bool operator<=(Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator<=(queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container == rhs.c_container);
 	}
 
 	template <class T, class Container>
-	bool operator!=(Queue<T, Container> &lhs, Queue<T, Container> &rhs)
+	bool operator!=(queue<T, Container> &lhs, queue<T, Container> &rhs)
 	{
 		return (lhs.c_container == rhs.c_container);
 	}

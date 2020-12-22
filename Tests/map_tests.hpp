@@ -53,13 +53,13 @@ void operators()
 	assert(map1 == map);
 	assert(map1 >= map);
 	assert(map1 <= map);
-	assert(map1 < map == false);
-	assert(map1 > map == false);
+	assert((map1 < map) == false);
+	assert((map1 > map) == false);
 	map1[0] = 21;
 	assert(map1 != map);
 	assert(map1 < map);
-	assert(map1 > map == false);
-	assert(map1 >= map == false);
+	assert((map1 > map) == false);
+	assert((map1 >= map) == false);
 	assert(map1 <= map);
 	map[0] = 45;
 	assert(map > map1);

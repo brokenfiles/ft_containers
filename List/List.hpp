@@ -3,6 +3,7 @@
 #define FT_CONTAINERS_LIST_HPP
 
 #include <iostream>
+#include <limits>
 #include "ListIterators.hpp"
 
 namespace ft
@@ -12,7 +13,7 @@ namespace ft
 	{ return (first < second); }
 
 	template<class T>
-	class List
+	class list
 	{
 
 	public:
@@ -42,14 +43,14 @@ namespace ft
 		{
 			this->c_end   = new Node<value_type>();
 			this->c_begin = this->c_end;
-			bounds();
+			this->bounds();
 		}
 
 		void bounds()
 		{
 			this->c_begin     = this->c_end;
-			this->c_end->prev = NULL;
-			this->c_end->next = NULL;
+			this->c_end->prev = this->c_begin;
+			this->c_end->next = this->c_begin;
 		}
 
 		reference _get(size_type n)
@@ -78,7 +79,7 @@ namespace ft
 		/**
 		 * empty container constructor (default)
 		 */
-		List()
+		list()
 		{
 			this->c_begin = NULL;
 			this->c_end   = NULL;
@@ -92,7 +93,7 @@ namespace ft
 		 * deallocates all the storage capacity allocated by the list container using its allocator.
 		 * @param NULL
 		 */
-		virtual ~List()
+		virtual ~list()
 		{
 			this->clear();
 			delete this->c_end;
@@ -104,7 +105,7 @@ namespace ft
 		 * @param n number of elements
 		 * @param val value to insert
 		 */
-		List(size_type n, const value_type &val = value_type())
+		list(size_type n, const value_type &val = value_type())
 		{
 			this->c_begin = NULL;
 			this->c_end   = NULL;
@@ -122,7 +123,7 @@ namespace ft
 		 * @param last last iterator (end of the range)
 		 */
 		template<class InputIterator>
-		List(InputIterator first, InputIterator last)
+		list(InputIterator first, InputIterator last)
 		{
 			this->c_begin = NULL;
 			this->c_end   = NULL;
@@ -134,9 +135,9 @@ namespace ft
 		/**
 		 * copy constructor
 		 * Constructs a container with a copy of each of the elements in x in the same order
-		 * @param x other List to copy
+		 * @param x other list to copy
 		 */
-		List(List &x)
+		list(list &x)
 		{
 			this->c_begin = NULL;
 			this->c_end   = NULL;
@@ -154,10 +155,10 @@ namespace ft
 		 * Assigns new contents to the container
 		 * replacing its current contents
 		 * modifying its size accordingly
-		 * @param x other List to copy
+		 * @param x other list to copy
 		 * @return current instance
 		 */
-		List &operator=(const List &x)
+		list &operator=(const list &x)
 		{
 			this->c_begin = x.c_begin;
 			this->c_end   = x.c_end;
@@ -182,16 +183,16 @@ namespace ft
 		{ return (const_iterator(this->c_end)); }
 
 		reverse_iterator rbegin()
-		{ return (reverse_iterator(this->c_end)); }
+		{ return (reverse_iterator(this->c_end->prev)); }
 
 		const_reverse_iterator rbegin() const
-		{ return (const_reverse_iterator(this->c_end)); }
+		{ return (const_reverse_iterator(this->c_end->prev)); }
 
 		reverse_iterator rend()
-		{ return (reverse_iterator(this->c_begin)); }
+		{ return (reverse_iterator(this->c_begin->prev)); }
 
 		const_reverse_iterator rend() const
-		{ return (const_reverse_iterator(this->c_begin)); }
+		{ return (const_reverse_iterator(this->c_begin->prev)); }
 
 		/*
 		 * Public functions
@@ -225,7 +226,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::List<value_type>) - sizeof(pointer));
+			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::list<value_type>) - sizeof(pointer));
 		}
 
 		/*
@@ -461,10 +462,17 @@ namespace ft
 		 */
 		void insert(iterator position, iterator first, iterator last)
 		{
-			while (first != last)
+			for (; first != last; first++)
 			{
 				insert(position, *first);
-				first++;
+			}
+		}
+
+		void print() {
+			iterator begin = this->begin();
+			while (begin != this->end()) {
+				std::cout << *begin << std::endl;
+				begin++;
 			}
 		}
 
@@ -523,7 +531,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/swap/
 		 * @param x (Another list container of the same type as this)
 		 */
-		void swap(List &x)
+		void swap(list &x)
 		{
 			this->swap(this->c_len, x.c_len);
 			this->swap(this->c_end, x.c_end);
@@ -582,7 +590,7 @@ namespace ft
 		 * @param position (Position within the container where the elements of x are inserted)
 		 * @param x (A list object of the same type)
 		 */
-		void splice(iterator position, List &x)
+		void splice(iterator position, list &x)
 		{
 			this->splice(position, x, x.begin(), x.end());
 		}
@@ -597,9 +605,10 @@ namespace ft
 		 * @param x (A list object of the same type)
 		 * @param i (Iterator to an element in x)
 		 */
-		void splice(iterator position, List &x, iterator i)
+		void splice(iterator position, list &x, iterator i)
 		{
-			this->splice(position, x, i, ++i);
+			this->insert(position, *i);
+			x.erase(i);
 		}
 
 		/**
@@ -613,7 +622,7 @@ namespace ft
 		 * @param first (Start of the range)
 		 * @param last (End of the range)
 		 */
-		void splice(iterator position, List &x, iterator first, iterator last)
+		void splice(iterator position, list &x, iterator first, iterator last)
 		{
 			insert(position, first, last);
 			x.erase(first, last);
@@ -726,7 +735,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/merge/
 		 * @param x (A list object of the same type)
 		 */
-		void merge(List &x)
+		void merge(list &x)
 		{
 			if (&x == this || x.empty())
 				return;
@@ -754,7 +763,7 @@ namespace ft
 		 *   the strict weak ordering it defines, and false otherwise)
 		 */
 		template<class Compare>
-		void merge(List &x, Compare comp)
+		void merge(list &x, Compare comp)
 		{
 			if (&x == this || x.empty())
 				return;
@@ -833,12 +842,12 @@ namespace ft
 	 */
 
 	template<class T>
-	bool operator==(List<T> &lhs, List<T> &rhs)
+	bool operator==(list<T> &lhs, list<T> &rhs)
 	{
 		if (lhs.size() != rhs.size())
 			return (false);
-		typename List<T>::iterator begin_lhs = lhs.begin();
-		typename List<T>::iterator begin_rhs = rhs.begin();
+		typename list<T>::iterator begin_lhs = lhs.begin();
+		typename list<T>::iterator begin_rhs = rhs.begin();
 		while (begin_lhs != lhs.end() && begin_rhs != rhs.end())
 		{
 			if (*begin_lhs != *begin_rhs)
@@ -850,20 +859,20 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator!=(List<T> &lhs, List<T> &rhs)
+	bool operator!=(list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs == rhs));
 	}
 
 	template<class T>
-	bool operator<(List<T> &lhs, List<T> &rhs)
+	bool operator<(list<T> &lhs, list<T> &rhs)
 	{
 		if (lhs == rhs || lhs.size() < rhs.size())
 			return (false);
 		if (lhs.size() > rhs.size())
 			return (true);
-		typename List<T>::iterator begin_lhs = lhs.begin();
-		typename List<T>::iterator begin_rhs = rhs.begin();
+		typename list<T>::iterator begin_lhs = lhs.begin();
+		typename list<T>::iterator begin_rhs = rhs.begin();
 		while (begin_lhs != lhs.end() && begin_rhs != rhs.end())
 		{
 			if (*begin_lhs != *begin_rhs)
@@ -875,19 +884,19 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator<=(List<T> &lhs, List<T> &rhs)
+	bool operator<=(list<T> &lhs, list<T> &rhs)
 	{
 		return ((lhs < rhs) || (lhs == rhs));
 	}
 
 	template<class T>
-	bool operator>(List<T> &lhs, List<T> &rhs)
+	bool operator>(list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs <= rhs));
 	}
 
 	template<class T>
-	bool operator>=(List<T> &lhs, List<T> &rhs)
+	bool operator>=(list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs < rhs));
 	}
@@ -897,11 +906,11 @@ namespace ft
 	 * The contents of container x are exchanged with those of y.
 	 * Both container objects must be of the same type
 	 * @tparam T
-	 * @param x (List container of the same type of y)
-	 * @param y (List container of the same type of x)
+	 * @param x (list container of the same type of y)
+	 * @param y (list container of the same type of x)
 	 */
 	template<class T>
-	void swap(List<T> &x, List<T> &y)
+	void swap(list<T> &x, list<T> &y)
 	{
 		x.swap(y);
 	}

@@ -5,7 +5,7 @@
 namespace ft
 {
 	template<class Key, class T, class Compare = std::less<Key> >
-	class Map
+	class map
 	{
 	public:
 		typedef Key                                     key_type;
@@ -42,17 +42,17 @@ namespace ft
 
 	public:
 		/**
-		 * Empty Map constructor
+		 * Empty map constructor
 		 * @param comp
 		 */
-		explicit Map(const key_compare &comp = key_compare())
+		explicit map(const key_compare &comp = key_compare())
 		{
 			this->_bst     = bst_type();
 			this->_compare = comp;
 		}
 
 		/**
-		 * Range Map constructor
+		 * Range map constructor
 		 *
 		 * Constructs a container with as many elements as the range [first,last), with each element constructed from its
 		 * corresponding element in that range.
@@ -62,7 +62,7 @@ namespace ft
 		 * @param comp
 		 */
 		template<class InputIterator>
-		Map(InputIterator first, InputIterator last, const key_compare &comp = key_compare())
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare())
 		{
 			this->_bst     = bst_type();
 			this->_compare = comp;
@@ -79,16 +79,16 @@ namespace ft
 		 * Constructs a container with a copy of each of the elements in x.
 		 * @param x
 		 */
-		Map(const Map &x)
+		map(const map &x)
 		{
 			this->_compare = x._compare;
 			_bst.copyFrom(x._bst);
 		}
 
 		/**
-		 * Map destructor
+		 * map destructor
 		 */
-		~Map()
+		~map()
 		{
 			_bst.clear_tree();
 		}
@@ -99,7 +99,7 @@ namespace ft
 		 * @param x
 		 * @return
 		 */
-		Map &operator=(const Map &x)
+		map &operator=(const map &x)
 		{
 			_bst.clear_tree();
 			this->_bst = x._bst;
@@ -309,7 +309,7 @@ namespace ft
 			}
 		}
 
-		void swap(Map &x)
+		void swap(map &x)
 		{
 			this->swap_t(&this->_bst, &x._bst);
 			this->swap_t(&this->_compare, &x._compare);
@@ -391,8 +391,8 @@ namespace ft
 	};
 
 	template<class Key, class T, class Compare>
-	bool operator==(Map<Key, T, Compare> &lhs,
-					Map<Key, T, Compare> &rhs)
+	bool operator==(map<Key, T, Compare> &lhs,
+					map<Key, T, Compare> &rhs)
 	{
 		if (lhs.size() != rhs.size())
 		{
@@ -400,7 +400,7 @@ namespace ft
 		}
 		if (lhs.size() > 0)
 		{
-			typedef typename Map<Key, T, Compare>::iterator iterator;
+			typedef typename map<Key, T, Compare>::iterator iterator;
 			iterator                                        rhs_begin = rhs.begin();
 			for (iterator                                   lhs_begin = lhs.begin();
 				 lhs_begin != lhs.end(); lhs_begin++)
@@ -416,21 +416,21 @@ namespace ft
 	}
 
 	template<class Key, class T, class Compare>
-	bool operator!=(Map<Key, T, Compare> &lhs,
-					Map<Key, T, Compare> &rhs)
+	bool operator!=(map<Key, T, Compare> &lhs,
+					map<Key, T, Compare> &rhs)
 	{
 		return !(lhs == rhs);
 	}
 
 	template<class Key, class T, class Compare>
-	bool operator<(Map<Key, T, Compare> &lhs,
-				   Map<Key, T, Compare> &rhs)
+	bool operator<(map<Key, T, Compare> &lhs,
+				   map<Key, T, Compare> &rhs)
 	{
 		if (rhs.empty() || lhs.empty())
 		{
 			return (lhs.size() < rhs.size());
 		}
-		typedef typename Map<Key, T, Compare>::iterator iterator;
+		typedef typename map<Key, T, Compare>::iterator iterator;
 		iterator                                        rhs_begin = rhs.begin();
 		for (iterator                                   lhs_begin = lhs.begin();
 			 lhs_begin != lhs.end(); lhs_begin++)
@@ -445,22 +445,22 @@ namespace ft
 	}
 
 	template<class Key, class T, class Compare>
-	bool operator>(Map<Key, T, Compare> &lhs,
-				   Map<Key, T, Compare> &rhs)
+	bool operator>(map<Key, T, Compare> &lhs,
+				   map<Key, T, Compare> &rhs)
 	{
 		return (rhs < lhs);
 	}
 
 	template<class Key, class T, class Compare>
-	bool operator<=(Map<Key, T, Compare> &lhs,
-					Map<Key, T, Compare> &rhs)
+	bool operator<=(map<Key, T, Compare> &lhs,
+					map<Key, T, Compare> &rhs)
 	{
 		return !(rhs < lhs);
 	}
 
 	template<class Key, class T, class Compare>
-	bool operator>=(Map<Key, T, Compare> &lhs,
-					Map<Key, T, Compare> &rhs)
+	bool operator>=(map<Key, T, Compare> &lhs,
+					map<Key, T, Compare> &rhs)
 	{
 		return !(lhs < rhs);
 	}

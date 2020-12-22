@@ -103,8 +103,6 @@ void splice()
 	assert(list.size() == 4);
 	list.splice(list.begin(), list2, list2.begin(), list2.begin());
 	assert(list.size() == 4);
-
-
 }
 
 template<class List>

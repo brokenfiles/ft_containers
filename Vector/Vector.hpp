@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cstddef>
 #include "../utils.hpp"
 
 # include "VectorIterators.hpp"
@@ -8,7 +9,7 @@ namespace ft
 {
 
 	template<class T, class Allocator = std::allocator<T> >
-	class Vector
+	class vector
 	{
 	public:
 		typedef T         value_type;
@@ -62,7 +63,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param alloc Allocator
 		 */
-		Vector(const allocator_type &alloc = allocator_type())
+		vector(const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
 			this->c_len       = 0;
@@ -80,7 +81,7 @@ namespace ft
 		 * @param val the value to copy n times in the container
 		 * @param alloc allocator
 		 */
-		Vector(size_type n, const value_type &val = value_type(),
+		vector(size_type n, const value_type &val = value_type(),
 			   const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
@@ -101,12 +102,12 @@ namespace ft
 		 * @param last iterator (end of the range)
 		 * @param alloc allocator
 		 */
-		Vector(iterator first, iterator last,
+		vector(iterator first, iterator last,
 			   const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
 			this->c_len       = 0;
-			this->c_capacity  = this->get_new_capacity(last - first);
+			this->c_capacity  = last - first;
 			this->c_container = NULL;
 			this->c_container = allocator.allocate(this->capacity());
 			this->assign(first, last);
@@ -119,7 +120,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param x other vector
 		 */
-		Vector(const Vector &x)
+		vector(const vector &x)
 		{
 			this->c_len       = 0;
 			this->c_capacity  = x.capacity();
@@ -129,13 +130,13 @@ namespace ft
 		}
 
 		/**
-		 * Vector destructor
+		 * vector destructor
 		 * Destroys the container object.
 		 *
 		 * This destroys all container elements, and deallocates all the storage capacity\
 		 *   allocated by the vector using its allocator.
 		 */
-		~Vector()
+		~vector()
 		{
 			this->allocator.deallocate(this->c_container, this->capacity());
 		}
@@ -145,10 +146,10 @@ namespace ft
 		 * Assigns new contents to the container, replacing its current contents and modifying its size
 		 *
 		 * @reference https://www.cplusplus.com/reference/vector/vector/operator=/
-		 * @param x another Vector object to copy
+		 * @param x another vector object to copy
 		 * @return this instance
 		 */
-		Vector &operator=(const Vector &x)
+		vector &operator=(const vector &x)
 		{
 			this->assign(x.begin(), x.end());
 			return (*this);
@@ -207,7 +208,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::Vector<value_type>) - sizeof(pointer));
+			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::vector<value_type>) - sizeof(pointer));
 		}
 
 		/**
@@ -514,12 +515,12 @@ namespace ft
 		{
 			if (n <= 0)
 			{ return; }
-			difference_type _position_index = position - this->begin();
+			size_t _position_index = position - this->begin();
 			this->reserve(this->get_new_capacity(this->size() + n));
-			for (difference_type index = (this->size() + n); index > _position_index; --index)
+			for (size_t index = (this->size() + n); index > _position_index; --index)
 			{ this->c_container[index] = this->c_container[index - n]; }
 			this->c_len += n;
-			for (difference_type index = _position_index; index < _position_index + n; ++index)
+			for (size_t index = _position_index; index < _position_index + n; ++index)
 			{ this->c_container[index] = val; }
 		}
 
@@ -535,8 +536,7 @@ namespace ft
 		 * @param first begin of element's range
 		 * @param last end of element's range
 		 */
-		template<class InputIterator>
-		void insert(iterator position, InputIterator first, InputIterator last)
+		void insert(iterator position, iterator first, iterator last)
 		{
 			difference_type _position_index = position - this->begin();
 			difference_type _elements       = last - first;
@@ -599,7 +599,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/swap/
 		 * @param x another vector
 		 */
-		void swap(Vector &x)
+		void swap(vector &x)
 		{
 			ft::swap(this->c_len, x.c_len);
 			ft::swap(this->c_container, x.c_container);
@@ -635,11 +635,11 @@ namespace ft
 
 	// TODO implement relational operators
 	template<class T>
-	bool operator==(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator==(const vector<T> &lhs, const vector<T> &rhs)
 	{
 		if (lhs.size() != rhs.size())
 		{ return (false); }
-		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
+		for (typename vector<T>::size_type i = 0; i < rhs.size(); ++i)
 		{
 			if (lhs[i] != rhs[i])
 			{ return false; }
@@ -648,40 +648,39 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator<(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator<(const vector<T> &lhs, const vector<T> &rhs)
 	{
-		if (lhs.size() < rhs.size())
-		{ return true; }
-		if (lhs.size() > rhs.size())
-		{ return false; }
-		for (typename Vector<T>::size_type i = 0; i < rhs.size(); ++i)
-		{
-			if (lhs[i] > rhs[i])
-			{ return (false); }
+		if (lhs.size() != rhs.size()) {
+			return (lhs.size() < rhs.size());
 		}
-		return (true);
+		for (typename vector<T>::size_type i = 0; i < rhs.size(); ++i)
+		{
+			if (lhs[i] < rhs[i])
+			{ return (true); }
+		}
+		return (false);
 	}
 
 	template<class T>
-	bool operator!=(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator!=(const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(lhs == rhs));
 	}
 
 	template<class T>
-	bool operator>(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator>(const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (rhs < lhs);
 	}
 
 	template<class T>
-	bool operator<=(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator<=(const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(rhs < lhs));
 	}
 
 	template<class T>
-	bool operator>=(const Vector<T> &lhs, const Vector<T> &rhs)
+	bool operator>=(const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(lhs < rhs));
 	}

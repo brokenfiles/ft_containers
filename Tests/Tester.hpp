@@ -4,7 +4,9 @@
 # include <cassert>
 # include <iostream>
 #include <list>
-#include <zconf.h>
+#include <unistd.h>
+#include <cstdlib>
+#include <wait.h>
 
 typedef void (*fn_ptr)();
 typedef std::list<std::string> wanted_tests_type;

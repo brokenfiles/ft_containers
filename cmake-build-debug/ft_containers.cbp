@@ -8,133 +8,141 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/louis/42/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/louis/42/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/louis/42/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ft_containers">
-				<Option output="/Users/louis/42/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/louis/42/ft_containers/cmake-build-debug"/>
+				<Option output="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ft_containers/fast">
-				<Option output="/Users/louis/42/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/louis/42/ft_containers/cmake-build-debug"/>
+				<Option output="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/louis/42/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/mnt/c/Users/louis/Projects/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/louis/42/ft_containers/List/List.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/List/List.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/List/ListIterators.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/List/ListIterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/BST.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/BST.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/Less.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Less.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/Map.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/MapIterators.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/MapIterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Map/Pair.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Pair.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Queue/Queue.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Queue/Queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Stack/Stack.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Stack/Stack.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Tests/Tester.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/Tester.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Tests/list.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/list.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Tests/list_tests.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/list_tests.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Tests/map.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Vector/Vector.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/Vector/VectorIterators.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/vector_tests.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/colors.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Vector/Vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/main.cpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Vector/VectorIterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/utils.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/colors.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/louis/42/ft_containers/CMakeLists.txt">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/utils.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
