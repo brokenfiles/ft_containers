@@ -1,15 +1,7 @@
 #ifndef MAP_TESTS_HPP
 # define MAP_TESTS_HPP
 
-# include "Tester.hpp"
-
-/*
-template<class List>
-void template_test()
-{
-	List list;
-}
- */
+# include "../Tester.hpp"
 
 template<class Map>
 void insert_and_change_values()
@@ -91,7 +83,6 @@ void iterators_tests()
 	assert(crbegin->first == 45 && crbegin->second == 32);
 	crbegin++;
 	assert(crbegin->first == 21 && crbegin->second == 45);
-
 }
 
 template<class Map>

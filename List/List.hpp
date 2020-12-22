@@ -95,8 +95,9 @@ namespace ft
 		 */
 		virtual ~list()
 		{
+			if (this->size() > 0)
+				delete this->c_end;
 			this->clear();
-			delete this->c_end;
 		}
 
 		/**
@@ -867,10 +868,11 @@ namespace ft
 	template<class T>
 	bool operator<(list<T> &lhs, list<T> &rhs)
 	{
-		if (lhs == rhs || lhs.size() < rhs.size())
+		if (lhs == rhs)
 			return (false);
-		if (lhs.size() > rhs.size())
-			return (true);
+		if (lhs.size() != rhs.size()) {
+			return (lhs.size() < rhs.size());
+		}
 		typename list<T>::iterator begin_lhs = lhs.begin();
 		typename list<T>::iterator begin_rhs = rhs.begin();
 		while (begin_lhs != lhs.end() && begin_rhs != rhs.end())

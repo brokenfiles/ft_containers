@@ -2,8 +2,8 @@
 # define VECTOR_HPP
 
 #include <map>
-# include "Tester.hpp"
-# include "vector_tests.hpp"
+# include "../Tester.hpp"
+# include "../unit_tests/vector_tests.hpp"
 
 template<class Vector>
 void exec_test_vector(wanted_tests_type tests = wanted_tests_type())

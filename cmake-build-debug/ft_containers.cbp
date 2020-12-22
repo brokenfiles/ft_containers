@@ -112,19 +112,37 @@
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/Tester.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/list.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/Tester_Include.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/list_tests.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/handlers/list.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/map.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/handlers/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/vector.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/handlers/queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/vector_tests.hpp">
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/handlers/stack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/handlers/vector.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/list_tests.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/queue_tests.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/stack_tests.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/vector_tests.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Vector/Vector.hpp">
@@ -134,9 +152,6 @@
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/colors.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/utils.hpp">

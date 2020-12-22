@@ -123,32 +123,32 @@ ft_containers/fast:
 	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/build
 .PHONY : ft_containers/fast
 
-main.o: main.cpp.o
+Tests/main.o: Tests/main.cpp.o
 
-.PHONY : main.o
+.PHONY : Tests/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/main.cpp.o
-.PHONY : main.cpp.o
+Tests/main.cpp.o:
+	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/Tests/main.cpp.o
+.PHONY : Tests/main.cpp.o
 
-main.i: main.cpp.i
+Tests/main.i: Tests/main.cpp.i
 
-.PHONY : main.i
+.PHONY : Tests/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/main.cpp.i
-.PHONY : main.cpp.i
+Tests/main.cpp.i:
+	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/Tests/main.cpp.i
+.PHONY : Tests/main.cpp.i
 
-main.s: main.cpp.s
+Tests/main.s: Tests/main.cpp.s
 
-.PHONY : main.s
+.PHONY : Tests/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/main.cpp.s
-.PHONY : main.cpp.s
+Tests/main.cpp.s:
+	$(MAKE) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/Tests/main.cpp.s
+.PHONY : Tests/main.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ft_containers"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... Tests/main.o"
+	@echo "... Tests/main.i"
+	@echo "... Tests/main.s"
 .PHONY : help
 
 

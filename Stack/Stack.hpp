@@ -3,8 +3,8 @@
 
 namespace ft
 {
-	template<class T, class Container = ft::List<T> >
-	class Stack
+	template<class T, class Container = ft::list<T> >
+	class stack
 	{
 	public:
 		typedef T value_type;
@@ -63,41 +63,46 @@ namespace ft
 		{
 			this->container.pop_back();
 		}
+
+		container_type &getContainer()
+		{
+			return container;
+		}
 	};
 
 	template<class T, class Container>
-	bool operator==(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator==(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs == rhs);
+		return (lhs.getContainer() == rhs.getContainer());
 	}
 
 	template<class T, class Container>
-	bool operator!=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator!=(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs != rhs);
+		return (lhs.getContainer() != rhs.getContainer());
 	}
 
 	template<class T, class Container>
-	bool operator<(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator<(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs < rhs);
+		return (lhs.getContainer() < rhs.getContainer());
 	}
 
 	template<class T, class Container>
-	bool operator<=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator<=(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs <= rhs);
+		return (lhs.getContainer() <= rhs.getContainer());
 	}
 
 	template<class T, class Container>
-	bool operator>(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator>(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs > rhs);
+		return (lhs.getContainer() > rhs.getContainer());
 	}
 
 	template<class T, class Container>
-	bool operator>=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+	bool operator>=(stack<T, Container> &lhs, stack<T, Container> &rhs)
 	{
-		return (lhs >= rhs);
+		return (lhs.getContainer() >= rhs.getContainer());
 	}
 }
