@@ -4,20 +4,10 @@
 #include "List/List.hpp"
 #include "Vector/Vector.hpp"
 #include "Map/Map.hpp"
-#include "Map/BST.hpp"
 #include <list>
-#include <vector>
-
-typedef std::pair<int, std::string> pair_type;
-
-typedef ft::BST<int, int>::Iterator iterator;
-typedef ft::BST<int, const int>::Iterator const_iterator;
-typedef ft::BST<int, std::string>::Node node_type;
 
 int main()
 {
-//	typedef ft::List<int>::reverse_iterator reverse_iterator;
-
 	exec_test_list<ft::list<int> >();
 //	exec_test_list<std::list<int> >();
 	std::list<std::string> map_tests;
