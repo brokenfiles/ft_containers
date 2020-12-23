@@ -172,6 +172,37 @@ void operators_vector_tests() {
 }
 
 template <class Vector>
+void assign_vector_tests() {
+	Vector vector;
+	assert(vector.size() == 0);
+	vector.push_back(5);
+	assert(vector.size() == 1);
+	assert(vector.capacity() == 1);
+	vector.assign(2, 50);
+	assert(vector.size() == 2);
+	assert(vector.capacity() == 2);
+	for (int i = 0; i < 5; ++i)
+	{
+		vector.push_back(i);
+	}
+	assert(vector.size() == 7);
+	assert(vector.capacity() == 8);
+	Vector vector1;
+	assert(vector1.size() == 0);
+	vector1.assign(vector.begin(), vector.end());
+	assert(vector1.size() == 7);
+	assert(vector1.capacity() == 7);
+	typedef typename Vector::iterator iterator;
+	iterator begin = vector.begin();
+	iterator begin1 = vector1.begin();
+	while (begin != vector.end()) {
+		assert(*begin == *begin1);
+		begin++;
+		begin1++;
+	}
+}
+
+template <class Vector>
 void swap_vector_tests() {
 	Vector vec(5, 42);
 	Vector vec1(8, 21);

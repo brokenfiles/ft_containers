@@ -42,6 +42,7 @@ private:
 	}
 
 public:
+	int total_fail;
 
 	bool hasFailedContainers() const {
 		return (!failed_containers.empty());
@@ -134,13 +135,14 @@ void launch_test(const std::string &func_name)
 			exit(status);
 		} else {
 			global.errors++;
+			tester.total_fail++;
 		}
 	}
 }
 
 void display_failed_containers() {
 	if (tester.hasFailedContainers() && !(STOP_IF_KO)) {
-		std::cout << "\n\033[01;31m" << "|- \033[0;31mContainers that contains error : " << tester.getFailedContainers() << "\033[0;0m" << std::endl;
+		std::cout << "\n\033[01;31m" << "|- \033[0;31mContainers that contains error : " << tester.getFailedContainers() << ".\nTotal [KO] : " << tester.total_fail << "\033[0;0m" << std::endl;
 	} else if (!tester.hasFailedContainers()) {
 		std::cout << "\n\033[01;32m" << "|- \033[01;32mAll your containers are good for this tester.\033[0;0m"
 				 << std::endl;
