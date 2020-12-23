@@ -40,7 +40,13 @@ deque
 ../List/List.hpp
 /mnt/c/Users/louis/Projects/ft_containers/List/List.hpp
 
+/mnt/c/Users/louis/Projects/ft_containers/Tests/Config.hpp
+
 /mnt/c/Users/louis/Projects/ft_containers/Tests/Tester.hpp
+Config.hpp
+/mnt/c/Users/louis/Projects/ft_containers/Tests/Config.hpp
+algorithm
+-
 map
 -
 cassert
@@ -54,6 +60,8 @@ unistd.h
 cstdlib
 -
 wait.h
+-
+sstream
 -
 
 /mnt/c/Users/louis/Projects/ft_containers/Tests/Tester_Include.hpp

@@ -7,9 +7,9 @@ CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 SRCSC		=	main.cpp
 
-OBJS		= ${SRCSC:%.c=${OBJS_DIR}/%.o}
+OBJS		= ${SRCSC:%.cpp=${OBJS_DIR}/%.o}
 
-${OBJS_DIR}/%.o: %.c
+${OBJS_DIR}/%.o: %.cpp
 			@mkdir -p ${@D}
 			@printf "\033[2K\033[0;35mFT_CONTAINERS_TESTER\033[0;0m:    \033[0;33mCompilation...    \033[0;31m%-15.15s\033[0;0m\r" $(notdir ${<})
 			@${CC} -pthread ${CFLAGS} -c $< -o $@
@@ -23,7 +23,7 @@ run:		${NAME}
 			@echo "\033[0;34mRunning ${NAME}...\033[0;0m"
 			@./${NAME}
 
-test:		${NAME}
+test:		re
 			@echo "\033[0;34mRunning ${NAME}...\033[0;0m"
 			@./${NAME}
 

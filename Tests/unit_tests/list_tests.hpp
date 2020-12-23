@@ -176,6 +176,18 @@ void merge()
 }
 
 template<class List>
+void pop_back() {
+	List list;
+	list.push_back(42);
+	list.push_front(21);
+	assert(list.size() == 2);
+	list.pop_back();
+	assert(list.size() == 1);
+	list.pop_back();
+	assert(list.size() == 0);
+}
+
+template<class List>
 void unique_binary_pred()
 {
 	List list;
@@ -201,6 +213,19 @@ void unique()
 	assert(list.size() == 20);
 	list.unique();
 	assert(list.size() == 10);
+}
+
+template<class List>
+void const_values_list_tests() {
+	List list;
+
+	list.push_back(42);
+	typedef typename List::iterator iterator;
+	typedef typename List::const_iterator const_iterator;
+	iterator begin = list.begin();
+	const_iterator cbegin = list.begin();
+	assert(isConst(*begin) == false);
+	assert(isConst(*cbegin));
 }
 
 template<class List>

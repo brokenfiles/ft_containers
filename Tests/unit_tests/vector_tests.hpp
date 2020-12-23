@@ -139,6 +139,15 @@ void constructors_vector_tests() {
 	Vector vector2(vector1.begin(), vector1.end());
 	assert(vector2.size() == 10);
 	assert(vector2.capacity() == 10);
+
+	Vector vector3(vector2);
+	assert(vector3.size() == 10);
+	assert(vector3.capacity() == 10);
+	assert(*vector3.begin() == 42);
+	typedef typename Vector::iterator iterator;
+	iterator end = vector3.end();
+	end--;
+	assert(*end == 42);
 }
 
 template <class Vector>
@@ -205,6 +214,18 @@ void element_access_vector_tests() {
 	assert(vector.front() == 42);
 	assert(vector.back() == 42);
 	assert(*(vector.begin()) == 42);
+}
+
+template <class Vector>
+void const_iterators_vector_tests() {
+	typedef typename Vector::iterator iterator;
+	typedef typename Vector::const_iterator const_iterator;
+	Vector vector;
+	vector.push_back(42);
+	iterator begin = vector.begin();
+	const_iterator cbegin = vector.begin();
+	assert(isConst(*begin) == false);
+	assert(isConst(*cbegin) == true);
 }
 
 #endif

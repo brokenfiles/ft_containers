@@ -91,22 +91,16 @@
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/BST.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Less.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Map.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/MapIterators.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Map/Pair.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Queue/Queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Stack/Stack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/Config.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/Tester.hpp">
@@ -134,6 +128,9 @@
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/list_tests.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/map_tests.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/louis/Projects/ft_containers/Tests/unit_tests/queue_tests.hpp">

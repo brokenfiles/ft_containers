@@ -38,5 +38,9 @@ int main()
 	exec_test_queue<ft::queue<int> >();
 	exec_test_stack<ft::stack<int> >();
 
+	/*
+	 * Ne pas toucher à cette ligne
+	 */
+	display_failed_containers();
 	return (0);
 }

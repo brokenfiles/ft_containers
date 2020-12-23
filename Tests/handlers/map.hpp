@@ -20,6 +20,7 @@ void exec_test_map(wanted_tests_type tests = wanted_tests_type())
 		register_test("swap_test", swap_test<Map>);
 		register_test("find_tests", find_tests<Map>);
 		register_test("bounds_tests", bounds_tests<Map>);
+		register_test("const_values_test", const_values_test<Map>);
 	}
 	//launch tests
 	global.start_test(tests);

@@ -18,6 +18,21 @@ void insert_and_change_values()
 }
 
 template<class Map>
+void const_values_test() {
+	Map map;
+
+	map[0] = 42;
+	typedef typename Map::iterator iterator;
+	typedef typename Map::const_iterator const_iterator;
+	iterator begin = map.begin();
+	const_iterator cbegin = map.begin();
+	assert(isConst(begin->first));
+	assert(isConst(begin->second) == false);
+	assert(isConst(cbegin->first));
+	assert(isConst(cbegin->second));
+}
+
+template<class Map>
 void constructors()
 {
 	Map map1;

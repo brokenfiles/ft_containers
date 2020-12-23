@@ -1,5 +1,5 @@
-#ifndef VECTOR_HPP
-# define VECTOR_HPP
+#ifndef HANDLER_VECTOR_HPP
+# define HANDLER_VECTOR_HPP
 
 #include <map>
 # include "../Tester.hpp"
@@ -22,6 +22,7 @@ void exec_test_vector(wanted_tests_type tests = wanted_tests_type())
 		register_test("swap_vector_tests", swap_vector_tests<Vector>);
 		register_test("clear_vector_tests", clear_vector_tests<Vector>);
 		register_test("pop_back_vector_tests", pop_back_vector_tests<Vector>);
+		register_test("const_iterators_vector_tests", const_iterators_vector_tests<Vector>);
 	}
 	//launch tests
 	global.start_test(tests);

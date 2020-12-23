@@ -160,6 +160,10 @@ namespace ft {
 		 * Operators
 		 */
 
+		pointer operator->() {
+			return node;
+		}
+
 		ListIterator<T> &operator++()
 		{
 			node = node->next;
@@ -286,6 +290,10 @@ namespace ft {
 		/*
 		 * Operators
 		 */
+
+		pointer operator->() {
+			return node;
+		}
 
 		ConstListIterator<T> &operator++()
 		{
@@ -414,6 +422,10 @@ namespace ft {
 		 * Operators
 		 */
 
+		pointer operator->() {
+			return node;
+		}
+
 		ReverseListIterator<T> &operator++()
 		{
 			node = node->prev;
@@ -538,6 +550,10 @@ namespace ft {
 		/*
 		 * Operators
 		 */
+
+		pointer operator->() {
+			return node;
+		}
 
 		ConstReverseListIterator<T> &operator++()
 		{

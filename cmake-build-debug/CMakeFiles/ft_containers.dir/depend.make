@@ -7,6 +7,7 @@ CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Map/BST.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Map/Map.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Queue/Queue.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Stack/Stack.hpp
+CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Tests/Config.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Tests/Tester.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Tests/Tester_Include.hpp
 CMakeFiles/ft_containers.dir/Tests/main.cpp.o: ../Tests/handlers/list.hpp

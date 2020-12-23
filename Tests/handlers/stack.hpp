@@ -1,5 +1,5 @@
-#ifndef TESTER_STACK_HPP
-# define TESTER_STACK_HPP
+#ifndef HANDLER_STACK_HPP
+# define HANDLER_STACK_HPP
 
 #include <map>
 # include "../Tester.hpp"
