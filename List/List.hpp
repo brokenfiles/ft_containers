@@ -8,7 +8,7 @@
 
 namespace ft
 {
-	template<typename T>
+	template<class T>
 	int _sort_less_than(T first, T second)
 	{ return (first < second); }
 
@@ -168,7 +168,7 @@ namespace ft
 		}
 
 		/*
-		 * Iterators
+		 * Iteratorsm
 		 */
 
 		iterator begin()
@@ -227,7 +227,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::list<value_type>) - sizeof(pointer));
+			return std::numeric_limits<size_type>::max() / (sizeof(this->c_begin));
 		}
 
 		/*
@@ -466,14 +466,6 @@ namespace ft
 			for (; first != last; first++)
 			{
 				insert(position, *first);
-			}
-		}
-
-		void print() {
-			iterator begin = this->begin();
-			while (begin != this->end()) {
-				std::cout << *begin << std::endl;
-				begin++;
 			}
 		}
 

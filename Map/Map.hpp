@@ -187,8 +187,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return (std::min((size_type) std::numeric_limits<difference_type>::max(),
-							 std::numeric_limits<size_type>::max() / (sizeof(node_type) + sizeof(pointer))));
+			return (std::numeric_limits<size_type>::max() / sizeof(this->_bst.root()));
 		}
 
 		/**
@@ -203,7 +202,7 @@ namespace ft
 		 */
 		mapped_type &operator[](const key_type &k)
 		{
-			node_pointer found = _bst.find_by_key(_bst.root(), k);
+			node_pointer found = _bst.find_by_key(k);
 			if (found != NULL)
 			{
 				return (found->_content.second);
@@ -235,7 +234,7 @@ namespace ft
 		 */
 		std::pair<iterator, bool> insert(const value_type &val)
 		{
-			node_pointer found = _bst.find_by_key(_bst.root(), val.first);
+			node_pointer found = _bst.find_by_key(val.first);
 			if (found != NULL)
 			{
 				return (std::make_pair(iterator(found, _bst.root()), false));
@@ -255,7 +254,7 @@ namespace ft
 		iterator insert(iterator position, const value_type &val)
 		{
 			(void) position;
-			node_pointer found = _bst.find_by_key(_bst.root(), val.first);
+			node_pointer found = _bst.find_by_key(val.first);
 			if (found != NULL)
 			{
 				return (iterator(found, _bst.root()));
@@ -276,7 +275,7 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			node_pointer found = _bst.find_by_key(_bst.root(), position->first);
+			node_pointer found = _bst.find_by_key(position->first);
 			if (found != NULL)
 			{
 				_bst.erase_from_key(position->first);
@@ -285,7 +284,7 @@ namespace ft
 
 		size_type erase(const key_type &k)
 		{
-			node_pointer found = _bst.find_by_key(_bst.root(), k);
+			node_pointer found = _bst.find_by_key(k);
 			if (found != NULL)
 			{
 				_bst.erase_from_key(k);
@@ -332,7 +331,7 @@ namespace ft
 
 		iterator find(const key_type &k)
 		{
-			node_type *found = _bst.find_by_key(_bst.root(), k);
+			node_type *found = _bst.find_by_key(k);
 			if (found)
 			{
 				return (iterator(found, _bst.root()));
@@ -345,15 +344,14 @@ namespace ft
 			node_type *found = _bst.find_by_key(k);
 			if (found)
 			{
-				return (const_iterator(found, this->root()));
+				return (const_iterator(found, this->_bst.root()));
 			}
-			return (const_iterator(this->end(), this->root()));
+			return (const_iterator(this->_bst.end(), this->_bst.root()));
 		}
 
 		size_type count(const key_type &k) const
 		{
-			node_type *found = _bst.find_by_key(k);
-			return (found != NULL ? 1 : 0);
+			return (find(k) != this->end() ? 1 : 0);
 		}
 
 		iterator upper_bound(const Key &key)

@@ -34,6 +34,7 @@ void exec_test_list(wanted_tests_type tests = wanted_tests_type())
 		register_test("const_values_list_tests", const_values_list_tests<List>);
 		register_test("pop_back", pop_back<List>);
 		register_test("swap", swap<List>);
+		register_test("constructors_list", constructors_list<List>);
 	}
 	//launch tests
 	global.start_test(tests);

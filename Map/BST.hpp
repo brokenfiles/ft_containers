@@ -921,7 +921,17 @@ namespace ft
 			return (this->_end);
 		}
 
+		node_type *end() const
+		{
+			return (this->_end);
+		}
+
 		node_type *root()
+		{
+			return (this->_root);
+		}
+
+		node_type *root() const
 		{
 			return (this->_root);
 		}
@@ -1029,8 +1039,7 @@ namespace ft
 			print2D(this->_root);
 		}
 
-		node_type *find_by_key(node_type *from_node, key_type key)
-		{
+		node_type *recurse_find_elem(node_type *from_node, key_type key) {
 			if (from_node == NULL)
 			{
 				return (NULL);
@@ -1051,6 +1060,50 @@ namespace ft
 				}
 			}
 			return (NULL);
+		}
+
+		node_type *find_by_key_with_root(node_type *root, key_type key) {
+			return (recurse_find_elem(root, key));
+		}
+
+		node_type *find_by_key(key_type key)
+		{
+			node_type *node = find_by_key_with_root(this->root(), key);
+			return (node);
+		}
+
+
+		node_type *recurse_find_elem(node_type *from_node, const key_type key) const {
+			if (from_node == NULL)
+			{
+				return (NULL);
+			}
+			while (from_node != NULL)
+			{
+				if (key > from_node->_content.first)
+				{
+					from_node = from_node->_right;
+				}
+				else if (from_node->_content.first > key)
+				{
+					from_node = from_node->_left;
+				}
+				else
+				{
+					return (from_node);
+				}
+			}
+			return (NULL);
+		}
+
+		node_type *find_by_key_with_root(node_type *root, const key_type key) const {
+			return (recurse_find_elem(root, key));
+		}
+
+		node_type *find_by_key(const key_type key) const
+		{
+			node_type *node = find_by_key_with_root(this->root(), key);
+			return (node);
 		}
 
 		node_type *find_by_pair(node_type *from_node, value_type pair)
@@ -1116,7 +1169,7 @@ namespace ft
 
 		size_type erase_from_key(const key_type &key)
 		{
-			node_type *found = find_by_key(_root, key);
+			node_type *found = find_by_key(key);
 			if (found != NULL)
 			{
 				delete_node(this->root(), found->getContent().first);

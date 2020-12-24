@@ -228,6 +228,39 @@ void const_values_list_tests() {
 	assert(isConst(*cbegin));
 }
 
+template <class List>
+void constructors_list() {
+	typedef typename List::iterator iterator;
+//	typedef typename List::const_iterator const_iterator;
+
+	List list;
+	assert(list.size() == 0);
+
+	List list1(5, 42);
+	assert(list1.size() == 5);
+	iterator begin = list1.begin();
+	while (begin != list1.end()) {
+		assert(*begin == 42);
+		begin++;
+	}
+
+	List list2(list1);
+	assert(list2.size() == 5);
+	begin = list2.begin();
+	while (begin != list2.end()) {
+		assert(*begin == 42);
+		begin++;
+	}
+
+	List list3(list2.begin(), list2.end());
+	assert(list3.size() == 5);
+	begin = list3.begin();
+	while (begin != list3.end()) {
+		assert(*begin == 42);
+		begin++;
+	}
+}
+
 template<class List>
 void remove_if()
 {
@@ -347,22 +380,33 @@ template<class List>
 void iterators()
 {
 	typedef typename List::iterator iterator;
-//	typedef typename List::const_iterator const_iterator;
+	typedef typename List::const_iterator const_iterator;
 	List list;
 	list.push_back(42);
 	list.push_front(5);
 	assert(list.size() == 2);
 	iterator begin = list.begin();
+	const_iterator cbegin = list.begin();
+	assert(isConst(*begin) == false);
+	assert(isConst(*cbegin) == true);
 	assert(*begin == 5);
+	assert(*cbegin == 5);
 	begin++;
+	cbegin++;
 	assert(*begin == 42);
+	assert(*cbegin == 42);
 	iterator end = list.end();
+	const_iterator cend = list.end();
 	end--;
+	cend--;
 	assert(*end == 42);
+	assert(*cend == 42);
 	end--;
+	cend--;
 	assert(*end == 5);
-	begin++;
+	assert(*cend == 5);
 	assert(end == list.begin());
+	assert(cend == list.begin());
 }
 
 template<class List>

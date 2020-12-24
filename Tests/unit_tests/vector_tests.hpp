@@ -72,6 +72,11 @@ void reserve_vector_tests() {
 	assert(vector.capacity() == 64);
 	vector.reserve(1);
 	assert(vector.capacity() == 64);
+
+	Vector vector1;
+	vector1.reserve(1);
+	assert(vector1.size() == 0);
+	assert(vector1.capacity() == 1);
 }
 
 template <class Vector>
@@ -148,6 +153,11 @@ void constructors_vector_tests() {
 	iterator end = vector3.end();
 	end--;
 	assert(*end == 42);
+
+	int myints[] = {16,2,77,29};
+	Vector fifth (myints, myints + sizeof(myints) / sizeof(int) );
+	assert(fifth.size() == 4);
+	assert(*fifth.begin() == 16);
 }
 
 template <class Vector>
@@ -200,6 +210,54 @@ void assign_vector_tests() {
 		begin++;
 		begin1++;
 	}
+}
+
+template <class Vector>
+void at_vector_tests() {
+	Vector vector;
+	vector.push_back(42);
+	vector.push_back(21);
+	assert(vector.at(0) == 42);
+	assert(vector.at(1) == 21);
+}
+
+template <class Vector>
+void erase_vector_tests() {
+	Vector vector;
+
+	for (int i = 0; i < 10; ++i)
+	{
+		vector.push_back(i);
+	}
+	assert(vector.size() == 10);
+	assert(vector.capacity() == 16);
+	vector.erase(vector.begin(), vector.end());
+	assert(vector.size() == 0);
+	for (int i = 0; i < 10; ++i)
+	{
+		vector.push_back(i);
+	}
+	assert(vector.size() == 10);
+	typedef typename Vector::iterator iterator;
+	iterator begin = vector.begin();
+	iterator end = vector.end();
+	begin++;
+	end--;
+	vector.erase(begin, end);
+	assert(vector.size() == 2);
+	assert(*vector.begin() == 0);
+	vector.erase(vector.begin());
+	assert(vector.size() == 1);
+	assert(*vector.begin() == 9);
+	vector.erase(vector.begin());
+	assert(vector.empty());
+}
+
+template <class Vector>
+void max_size_vector_tests() {
+	Vector vector;
+
+	assert(vector.max_size() > sizeof(size_t));
 }
 
 template <class Vector>

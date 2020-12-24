@@ -208,7 +208,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return std::numeric_limits<std::size_t>::max() / (sizeof(ft::vector<value_type>) - sizeof(pointer));
+			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 
 		/**
@@ -410,6 +410,8 @@ namespace ft
 		 */
 		void assign(iterator first, iterator last)
 		{
+			difference_type difference = (last - first);
+			reserve(difference);
 			this->clear();
 			while (first != last)
 			{
@@ -429,6 +431,8 @@ namespace ft
 		 */
 		void assign(const_iterator first, const_iterator last)
 		{
+			difference_type difference = (last - first);
+			reserve(difference);
 			this->clear();
 			while (first != last)
 			{
@@ -448,6 +452,7 @@ namespace ft
 		 */
 		void assign(size_type n, const value_type &val)
 		{
+			reserve(n);
 			this->clear();
 			for (size_type i = 0; i < n; ++i)
 			{ push_back(val); }
@@ -562,7 +567,7 @@ namespace ft
 		 */
 		iterator erase(iterator position)
 		{
-			difference_type _pos_index = position - this->begin() - 1;
+			difference_type _pos_index = position - this->begin();
 			for (size_type  index      = _pos_index; index < this->size() - 1; index++)
 			{ this->c_container[index] = this->c_container[index + 1]; }
 			this->c_len--;

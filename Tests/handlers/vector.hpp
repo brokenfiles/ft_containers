@@ -24,6 +24,9 @@ void exec_test_vector(wanted_tests_type tests = wanted_tests_type())
 		register_test("pop_back_vector_tests", pop_back_vector_tests<Vector>);
 		register_test("const_iterators_vector_tests", const_iterators_vector_tests<Vector>);
 		register_test("assign_vector_tests", assign_vector_tests<Vector>);
+		register_test("at_vector_tests", at_vector_tests<Vector>);
+		register_test("erase_vector_tests", erase_vector_tests<Vector>);
+		register_test("max_size_vector_tests", max_size_vector_tests<Vector>);
 	}
 	//launch tests
 	global.start_test(tests);
