@@ -223,7 +223,7 @@ namespace ft
 			Iterator(const ConstIterator &x)
 			{
 				this->_root = x._root;
-				this->_root = x._node;
+				this->_node = x._node;
 			}
 
 			Iterator &operator=(const ConstIterator &x)
@@ -299,7 +299,7 @@ namespace ft
 			ConstIterator(const Iterator &x)
 			{
 				this->_root = x._root;
-				this->_root = x._node;
+				this->_node = x._node;
 			}
 
 			ConstIterator &operator=(const Iterator &x)
@@ -487,7 +487,7 @@ namespace ft
 			ReverseIterator(const ConstReverseIterator &x)
 			{
 				this->_root = x._root;
-				this->_root = x._node;
+				this->_node = x._node;
 			}
 
 			ReverseIterator &operator=(const ConstReverseIterator &x)
@@ -674,7 +674,7 @@ namespace ft
 			ConstReverseIterator(const ReverseIterator &x)
 			{
 				this->_root = x._root;
-				this->_root = x._node;
+				this->_node = x._node;
 			}
 
 			ConstReverseIterator &operator=(const ReverseIterator &x)
@@ -1204,6 +1204,11 @@ namespace ft
 			return (curr);
 		}
 
+		/**
+		 * @reference https://www.techiedelight.com/deletion-from-bst/
+		 * @param root the recursive starts from here
+		 * @param key the key to delete
+		 */
 		void delete_node(node_type *root, key_type key)
 		{
 			node_type *parent = NULL;
@@ -1271,8 +1276,8 @@ namespace ft
 			{
 				return;
 			}
-			this->recusrive_free(node->_left);
-			this->recusrive_free(node->_right);
+			this->recursive_free(node->_left);
+			this->recursive_free(node->_right);
 			delete node;
 		}
 
@@ -1280,6 +1285,7 @@ namespace ft
 		{
 			if (this->empty())
 			{ return; }
+			this->recursive_free(this->root());
 			this->_root         = NULL;
 			this->_end->_parent = NULL;
 			this->_end->_left   = NULL;

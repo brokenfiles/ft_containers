@@ -208,7 +208,7 @@ namespace ft
 		 */
 		size_type max_size() const
 		{
-			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
+			return (this->allocator.max_size());
 		}
 
 		/**

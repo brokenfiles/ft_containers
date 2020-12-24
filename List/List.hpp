@@ -9,10 +9,11 @@
 namespace ft
 {
 	template<class T>
-	int _sort_less_than(T first, T second)
+
+	int _sort_less_than (T first, T second)
 	{ return (first < second); }
 
-	template<class T>
+	template<class T, class Alloc = std::allocator<T> >
 	class list
 	{
 
@@ -24,6 +25,7 @@ namespace ft
 		typedef const value_type            &const_reference;
 		typedef value_type                  *pointer;
 		typedef const value_type            *const_pointer;
+		typedef Alloc                       allocator_type;
 		typedef ListIterator<T>             iterator;
 		typedef ConstListIterator<T>        const_iterator;
 		typedef ReverseListIterator<T>      reverse_iterator;
@@ -33,27 +35,28 @@ namespace ft
 		Node<value_type> *c_begin;
 		Node<value_type> *c_end;
 		size_type        c_len;
+		allocator_type   allocator;
 
 	private:
 
 		/**
 		 * Initiate the chained list
 		 */
-		void init_chained_link()
+		void init_chained_link ()
 		{
 			this->c_end   = new Node<value_type>();
 			this->c_begin = this->c_end;
 			this->bounds();
 		}
 
-		void bounds()
+		void bounds ()
 		{
 			this->c_begin     = this->c_end;
 			this->c_end->prev = this->c_begin;
 			this->c_end->next = this->c_begin;
 		}
 
-		reference _get(size_type n)
+		reference _get (size_type n)
 		{
 			if (n < 0 || n >= this->c_len)
 				throw std::invalid_argument("argument n is invalid (< 0 || >= c_len)");
@@ -64,7 +67,7 @@ namespace ft
 		}
 
 		template<typename C>
-		void swap(C &one, C &second)
+		void swap (C &one, C &second)
 		{
 			C tmp = second;
 			second = one;
@@ -79,11 +82,12 @@ namespace ft
 		/**
 		 * empty container constructor (default)
 		 */
-		list()
+		list (const allocator_type &alloc = allocator_type())
 		{
-			this->c_begin = NULL;
-			this->c_end   = NULL;
-			this->c_len   = 0;
+			this->c_begin   = NULL;
+			this->c_end     = NULL;
+			this->allocator = alloc;
+			this->c_len     = 0;
 			this->init_chained_link();
 		}
 
@@ -93,7 +97,7 @@ namespace ft
 		 * deallocates all the storage capacity allocated by the list container using its allocator.
 		 * @param NULL
 		 */
-		virtual ~list()
+		virtual ~list ()
 		{
 			if (this->size() > 0)
 				delete this->c_end;
@@ -106,11 +110,12 @@ namespace ft
 		 * @param n number of elements
 		 * @param val value to insert
 		 */
-		list(size_type n, const value_type &val = value_type())
+		list (size_type n, const value_type &val = value_type(), const allocator_type &alloc = allocator_type())
 		{
-			this->c_begin = NULL;
-			this->c_end   = NULL;
-			this->c_len   = 0;
+			this->c_begin   = NULL;
+			this->c_end     = NULL;
+			this->c_len     = 0;
+			this->allocator = alloc;
 			this->init_chained_link();
 			this->assign(n, val);
 		}
@@ -124,11 +129,12 @@ namespace ft
 		 * @param last last iterator (end of the range)
 		 */
 		template<class InputIterator>
-		list(InputIterator first, InputIterator last)
+		list (InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type())
 		{
-			this->c_begin = NULL;
-			this->c_end   = NULL;
-			this->c_len   = 0;
+			this->c_begin   = NULL;
+			this->c_end     = NULL;
+			this->c_len     = 0;
+			this->allocator = alloc;
 			this->init_chained_link();
 			this->assign(first, last);
 		}
@@ -138,7 +144,7 @@ namespace ft
 		 * Constructs a container with a copy of each of the elements in x in the same order
 		 * @param x other list to copy
 		 */
-		list(list &x)
+		list (list &x)
 		{
 			this->c_begin = NULL;
 			this->c_end   = NULL;
@@ -159,7 +165,7 @@ namespace ft
 		 * @param x other list to copy
 		 * @return current instance
 		 */
-		list &operator=(const list &x)
+		list &operator= (const list &x)
 		{
 			this->c_begin = x.c_begin;
 			this->c_end   = x.c_end;
@@ -171,28 +177,28 @@ namespace ft
 		 * Iteratorsm
 		 */
 
-		iterator begin()
+		iterator begin ()
 		{ return (iterator(this->c_begin)); }
 
-		const_iterator begin() const
+		const_iterator begin () const
 		{ return (const_iterator(this->c_begin)); }
 
-		iterator end()
+		iterator end ()
 		{ return (iterator(this->c_end)); }
 
-		const_iterator end() const
+		const_iterator end () const
 		{ return (const_iterator(this->c_end)); }
 
-		reverse_iterator rbegin()
+		reverse_iterator rbegin ()
 		{ return (reverse_iterator(this->c_end->prev)); }
 
-		const_reverse_iterator rbegin() const
+		const_reverse_iterator rbegin () const
 		{ return (const_reverse_iterator(this->c_end->prev)); }
 
-		reverse_iterator rend()
+		reverse_iterator rend ()
 		{ return (reverse_iterator(this->c_begin->prev)); }
 
-		const_reverse_iterator rend() const
+		const_reverse_iterator rend () const
 		{ return (const_reverse_iterator(this->c_begin->prev)); }
 
 		/*
@@ -207,7 +213,7 @@ namespace ft
 		 * Returns whether the list container is empty (i.e. whether its size is 0)
 		 * @return bool (true if the container size is 0, false otherwise)
 		 */
-		bool empty() const
+		bool empty () const
 		{
 			return (this->c_len == 0);
 		}
@@ -215,7 +221,7 @@ namespace ft
 		/**
 		 * @return size_type (The number of elements in the container)
 		 */
-		size_type size() const
+		size_type size () const
 		{
 			return (this->c_len);
 		}
@@ -225,9 +231,9 @@ namespace ft
 		 *   due to known system or library implementation limitations
 		 * @return size_type (The maximum number of elements the object can hold as content)
 		 */
-		size_type max_size() const
+		size_type max_size () const
 		{
-			return std::numeric_limits<size_type>::max() / (sizeof(this->c_begin));
+			return (this->allocator.max_size());
 		}
 
 		/*
@@ -237,7 +243,7 @@ namespace ft
 		/**
 		 * @return reference (a reference to the first element in the list container)
 		 */
-		reference front()
+		reference front ()
 		{
 			return (this->c_begin->content);
 		}
@@ -245,7 +251,7 @@ namespace ft
 		/**
 		 * @return const_reference (a reference to the first element in the list container)
 		 */
-		const_reference front() const
+		const_reference front () const
 		{
 			return (this->c_begin->content);
 		}
@@ -253,7 +259,7 @@ namespace ft
 		/**
 		 * @return reference (a reference to the last element in the list container)
 		 */
-		reference back()
+		reference back ()
 		{
 			if (this->empty()) return (this->front());
 			else return (this->c_end->prev->content);
@@ -262,7 +268,7 @@ namespace ft
 		/**
 		 * @return const_reference (a reference to the last element in the list container)
 		 */
-		const_reference back() const
+		const_reference back () const
 		{
 			if (this->empty()) return (this->front());
 			else return (this->c_end->prev->content);
@@ -282,7 +288,7 @@ namespace ft
 		 * @param first (begin of the Iterator)
 		 * @param last (end of the Iterator)
 		 */
-		void assign(iterator first, iterator last)
+		void assign (iterator first, iterator last)
 		{
 			clear();
 			while (first != last)
@@ -302,7 +308,7 @@ namespace ft
 		 * @param first (begin of the Iterator)
 		 * @param last (end of the Iterator)
 		 */
-		void assign(const_iterator first, const_iterator last)
+		void assign (const_iterator first, const_iterator last)
 		{
 			clear();
 			while (first != last)
@@ -319,7 +325,7 @@ namespace ft
 		 * @param n (number of elements)
 		 * @param val (value to copy into container)
 		 */
-		void assign(size_type n, const value_type &val)
+		void assign (size_type n, const value_type &val)
 		{
 			this->clear();
 			for (size_type i = 0; i < n; ++i)
@@ -333,7 +339,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/push_front/
 		 * @param val (Value to be copied)
 		 */
-		void push_front(const value_type &val)
+		void push_front (const value_type &val)
 		{
 			Node<value_type> *node = new Node<value_type>(NULL, val, NULL);
 			if (this->empty()) this->c_end->insert_before(node);
@@ -348,7 +354,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/push_back/
 		 * @param val (Value to be copied)
 		 */
-		void push_back(const value_type &val)
+		void push_back (const value_type &val)
 		{
 			Node<value_type> *node = new Node<value_type>(NULL, val, NULL);
 			this->c_end->insert_before(node);
@@ -361,7 +367,7 @@ namespace ft
 		 * Removes the first element in the list container, effectively reducing its size by one
 		 * @reference https://www.cplusplus.com/reference/list/list/pop_front/
 		 */
-		void pop_front()
+		void pop_front ()
 		{
 			if (this->empty()) return;
 			else if (this->size() == 1)
@@ -386,7 +392,7 @@ namespace ft
 		 * Removes the last element in the list container, effectively reducing the container size by one
 		 * @reference https://www.cplusplus.com/reference/list/list/pop_back/
 		 */
-		void pop_back()
+		void pop_back ()
 		{
 			if (this->empty()) return;
 			else if (this->size() == 1) this->pop_front();
@@ -411,7 +417,7 @@ namespace ft
 		 * @param val (Value to be copied)
 		 * @return iterator (An iterator that points to the first of the newly inserted elements)
 		 */
-		iterator insert(iterator position, const value_type &val)
+		iterator insert (iterator position, const value_type &val)
 		{
 			if (position == this->begin())
 			{
@@ -443,7 +449,7 @@ namespace ft
 		 * @param n (Number of elements to insert)
 		 * @param val (Value to be copied)
 		 */
-		void insert(iterator position, size_type n, const value_type &val)
+		void insert (iterator position, size_type n, const value_type &val)
 		{
 			for (size_type i = 0; i < n; ++i)
 				this->insert(position, val);
@@ -461,7 +467,7 @@ namespace ft
 		 * @param first (Begin of the iterator)
 		 * @param last (End of the iterator)
 		 */
-		void insert(iterator position, iterator first, iterator last)
+		void insert (iterator position, iterator first, iterator last)
 		{
 			for (; first != last; first++)
 			{
@@ -477,7 +483,7 @@ namespace ft
 		 * @return iterator (An iterator pointing to the element that followed\
 		 *   the last element erased by the function call)
 		 */
-		iterator erase(iterator position)
+		iterator erase (iterator position)
 		{
 			if (position == this->begin())
 			{
@@ -507,7 +513,7 @@ namespace ft
 		 * @return iterator (An iterator pointing to the element that followed\
 		 *   the last element erased by the function call)
 		 */
-		iterator erase(iterator first, iterator last)
+		iterator erase (iterator first, iterator last)
 		{
 			while (first != last)
 			{
@@ -524,7 +530,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/swap/
 		 * @param x (Another list container of the same type as this)
 		 */
-		void swap(list &x)
+		void swap (list &x)
 		{
 			this->swap(this->c_len, x.c_len);
 			this->swap(this->c_end, x.c_end);
@@ -545,7 +551,7 @@ namespace ft
 		 * @param val (Object whose content is copied to the added elements in case that n\
 		 *   is greater than the current container size)
 		 */
-		void resize(size_type n, value_type val = value_type())
+		void resize (size_type n, value_type val = value_type())
 		{
 			if (n < this->size())
 			{
@@ -563,7 +569,7 @@ namespace ft
 		 * Leaving the container with a size of 0
 		 * @reference https://www.cplusplus.com/reference/list/list/clear/
 		 */
-		void clear()
+		void clear ()
 		{
 			if (!this->empty())
 				this->erase(this->begin(), this->end());
@@ -583,7 +589,7 @@ namespace ft
 		 * @param position (Position within the container where the elements of x are inserted)
 		 * @param x (A list object of the same type)
 		 */
-		void splice(iterator position, list &x)
+		void splice (iterator position, list &x)
 		{
 			this->splice(position, x, x.begin(), x.end());
 		}
@@ -598,7 +604,7 @@ namespace ft
 		 * @param x (A list object of the same type)
 		 * @param i (Iterator to an element in x)
 		 */
-		void splice(iterator position, list &x, iterator i)
+		void splice (iterator position, list &x, iterator i)
 		{
 			this->insert(position, *i);
 			x.erase(i);
@@ -615,7 +621,7 @@ namespace ft
 		 * @param first (Start of the range)
 		 * @param last (End of the range)
 		 */
-		void splice(iterator position, list &x, iterator first, iterator last)
+		void splice (iterator position, list &x, iterator first, iterator last)
 		{
 			insert(position, first, last);
 			x.erase(first, last);
@@ -629,7 +635,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/remove/
 		 * @param val (Value of the elements to be removed)
 		 */
-		void remove(const value_type &val)
+		void remove (const value_type &val)
 		{
 			iterator first = this->begin();
 			while (first != this->end())
@@ -650,7 +656,7 @@ namespace ft
 		 *   and false for those remaining.)
 		 */
 		template<class Predicate>
-		void remove_if(Predicate pred)
+		void remove_if (Predicate pred)
 		{
 			iterator begin = this->begin();
 			while (begin != this->end())
@@ -666,7 +672,7 @@ namespace ft
 		 * Removes all but the first element from every consecutive group of equal elements in the container
 		 * @reference https://www.cplusplus.com/reference/list/list/unique/
 		 */
-		void unique()
+		void unique ()
 		{
 			if (this->empty())
 				return;
@@ -695,7 +701,7 @@ namespace ft
 		 *   the container, and false otherwise)
 		 */
 		template<class BinaryPredicate>
-		void unique(BinaryPredicate binary_pred)
+		void unique (BinaryPredicate binary_pred)
 		{
 			if (this->empty())
 				return;
@@ -728,7 +734,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/list/list/merge/
 		 * @param x (A list object of the same type)
 		 */
-		void merge(list &x)
+		void merge (list &x)
 		{
 			if (&x == this || x.empty())
 				return;
@@ -756,7 +762,7 @@ namespace ft
 		 *   the strict weak ordering it defines, and false otherwise)
 		 */
 		template<class Compare>
-		void merge(list &x, Compare comp)
+		void merge (list &x, Compare comp)
 		{
 			if (&x == this || x.empty())
 				return;
@@ -772,7 +778,7 @@ namespace ft
 		 * The sorting is performed by applying an algorithm that uses operator <
 		 * @reference https://www.cplusplus.com/reference/list/list/sort/
 		 */
-		void sort()
+		void sort ()
 		{
 			this->sort(_sort_less_than<T>);
 		}
@@ -790,7 +796,7 @@ namespace ft
 		 *   weak ordering it defines, and false otherwise)
 		 */
 		template<class Compare>
-		void sort(Compare comp)
+		void sort (Compare comp)
 		{
 			if (!this->empty())
 			{
@@ -814,7 +820,7 @@ namespace ft
 		 * Reverses the order of the elements in the list container
 		 * @reference https://www.cplusplus.com/reference/list/list/reverse/
 		 */
-		void reverse()
+		void reverse ()
 		{
 			if (!this->empty())
 			{
@@ -835,7 +841,7 @@ namespace ft
 	 */
 
 	template<class T>
-	bool operator==(list<T> &lhs, list<T> &rhs)
+	bool operator== (list<T> &lhs, list<T> &rhs)
 	{
 		if (lhs.size() != rhs.size())
 			return (false);
@@ -852,17 +858,18 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator!=(list<T> &lhs, list<T> &rhs)
+	bool operator!= (list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs == rhs));
 	}
 
 	template<class T>
-	bool operator<(list<T> &lhs, list<T> &rhs)
+	bool operator< (list<T> &lhs, list<T> &rhs)
 	{
 		if (lhs == rhs)
 			return (false);
-		if (lhs.size() != rhs.size()) {
+		if (lhs.size() != rhs.size())
+		{
 			return (lhs.size() < rhs.size());
 		}
 		typename list<T>::iterator begin_lhs = lhs.begin();
@@ -878,19 +885,19 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator<=(list<T> &lhs, list<T> &rhs)
+	bool operator<= (list<T> &lhs, list<T> &rhs)
 	{
 		return ((lhs < rhs) || (lhs == rhs));
 	}
 
 	template<class T>
-	bool operator>(list<T> &lhs, list<T> &rhs)
+	bool operator> (list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs <= rhs));
 	}
 
 	template<class T>
-	bool operator>=(list<T> &lhs, list<T> &rhs)
+	bool operator>= (list<T> &lhs, list<T> &rhs)
 	{
 		return (!(lhs < rhs));
 	}
@@ -904,7 +911,7 @@ namespace ft
 	 * @param y (list container of the same type of x)
 	 */
 	template<class T>
-	void swap(list<T> &x, list<T> &y)
+	void swap (list<T> &x, list<T> &y)
 	{
 		x.swap(y);
 	}

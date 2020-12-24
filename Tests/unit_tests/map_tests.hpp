@@ -188,6 +188,7 @@ template<class Map>
 void bounds_tests()
 {
 	typedef typename Map::iterator iterator;
+	typedef typename Map::const_iterator const_iterator;
 	Map map;
 	for (int i = 0; i < 10; ++i)
 	{
@@ -195,11 +196,18 @@ void bounds_tests()
 	}
 	iterator lb = map.lower_bound(5);
 	iterator ub = map.upper_bound(5);
+	const_iterator clb = map.lower_bound(5);
+	const_iterator cub = map.upper_bound(5);
 	std::pair<iterator, iterator> er = map.equal_range(5);
+	std::pair<const_iterator, const_iterator> cer = map.equal_range(5);
 	assert(lb->second == 25);
+	assert(clb->second == 25);
 	assert(ub->second == 30);
+	assert(cub->second == 30);
 	assert(er.first->second == 25);
+	assert(cer.first->second == 25);
 	assert(er.second->second == 30);
+	assert(cer.second->second == 30);
 }
 
 template<class Map>
