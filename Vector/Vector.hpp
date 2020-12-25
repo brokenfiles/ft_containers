@@ -12,27 +12,27 @@ namespace ft
 	class vector
 	{
 	public:
-		typedef T         value_type;
-		typedef Allocator allocator_type;
-		typedef T       &reference;
-		typedef const T &const_reference;
-		typedef T       *pointer;
-		typedef const T *const_pointer;
-		typedef VectorIterator<T>                   iterator;
+		typedef T                             value_type;
+		typedef Allocator                     allocator_type;
+		typedef T                             &reference;
+		typedef const T                       &const_reference;
+		typedef T                             *pointer;
+		typedef const T                       *const_pointer;
+		typedef VectorIterator<T>             iterator;
 		typedef ConstVectorIterator<T>        const_iterator;
-		typedef ReverseVectorIterator<T>            reverse_iterator;
+		typedef ReverseVectorIterator<T>      reverse_iterator;
 		typedef ConstReverseVectorIterator<T> const_reverse_iterator;
-		typedef ptrdiff_t                           difference_type;
-		typedef size_t                              size_type;
+		typedef ptrdiff_t                     difference_type;
+		typedef size_t                        size_type;
 
 	protected:
-		T *c_container;
+		T              *c_container;
 		size_type      c_len;
 		size_type      c_capacity;
 		allocator_type allocator;
 
 	private:
-		size_type get_new_capacity(size_type requested_capacity)
+		size_type get_new_capacity (size_type requested_capacity)
 		{
 			size_type new_cap = 0;
 			size_type power   = 0;
@@ -41,7 +41,7 @@ namespace ft
 			return (new_cap);
 		}
 
-		void realloc(size_type previous_capacity)
+		void realloc (size_type previous_capacity)
 		{
 			T *new_container;
 			new_container = this->allocator.allocate(this->c_capacity);
@@ -63,7 +63,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param alloc Allocator
 		 */
-		vector(const allocator_type &alloc = allocator_type())
+		vector (const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
 			this->c_len       = 0;
@@ -81,8 +81,8 @@ namespace ft
 		 * @param val the value to copy n times in the container
 		 * @param alloc allocator
 		 */
-		vector(size_type n, const value_type &val = value_type(),
-			   const allocator_type &alloc = allocator_type())
+		vector (size_type n, const value_type &val = value_type(),
+				const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
 			this->c_len       = 0;
@@ -102,8 +102,8 @@ namespace ft
 		 * @param last iterator (end of the range)
 		 * @param alloc allocator
 		 */
-		vector(iterator first, iterator last,
-			   const allocator_type &alloc = allocator_type())
+		vector (iterator first, iterator last,
+				const allocator_type &alloc = allocator_type())
 		{
 			this->allocator   = alloc;
 			this->c_len       = 0;
@@ -120,7 +120,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/vector/
 		 * @param x other vector
 		 */
-		vector(const vector &x)
+		vector (const vector &x)
 		{
 			this->c_len       = 0;
 			this->c_capacity  = x.capacity();
@@ -136,7 +136,7 @@ namespace ft
 		 * This destroys all container elements, and deallocates all the storage capacity\
 		 *   allocated by the vector using its allocator.
 		 */
-		~vector()
+		~vector ()
 		{
 			this->allocator.deallocate(this->c_container, this->capacity());
 		}
@@ -149,7 +149,7 @@ namespace ft
 		 * @param x another vector object to copy
 		 * @return this instance
 		 */
-		vector &operator=(const vector &x)
+		vector &operator= (const vector &x)
 		{
 			this->assign(x.begin(), x.end());
 			return (*this);
@@ -159,28 +159,28 @@ namespace ft
 		 * Iterators
 		 */
 
-		iterator begin()
+		iterator begin ()
 		{ return (iterator(&this->at(0))); }
 
-		const_iterator begin() const
+		const_iterator begin () const
 		{ return (const_iterator(&this->at(0))); }
 
-		iterator end()
+		iterator end ()
 		{ return (iterator(&this->at(this->size()))); }
 
-		const_iterator end() const
+		const_iterator end () const
 		{ return (const_iterator(&this->at(this->size()))); }
 
-		reverse_iterator rbegin()
+		reverse_iterator rbegin ()
 		{ return (reverse_iterator(&this->at(this->size() - 1))); }
 
-		const_reverse_iterator rbegin() const
+		const_reverse_iterator rbegin () const
 		{ return (const_reverse_iterator(&this->at(this->size() - 1))); }
 
-		reverse_iterator rend()
+		reverse_iterator rend ()
 		{ return (reverse_iterator(&this->at(-1))); }
 
-		const_reverse_iterator rend() const
+		const_reverse_iterator rend () const
 		{ return (reverse_iterator(&this->at(-1))); }
 
 		/*
@@ -194,7 +194,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/size/
 		 * @return container's size
 		 */
-		size_type size() const
+		size_type size () const
 		{
 			return (this->c_len);
 		}
@@ -206,7 +206,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/max_size/
 		 * @return the maximum number of elements
 		 */
-		size_type max_size() const
+		size_type max_size () const
 		{
 			return (this->allocator.max_size());
 		}
@@ -226,7 +226,7 @@ namespace ft
 		 * @param n new container size
 		 * @param val new value of the elements
 		 */
-		void resize(size_type n, value_type val = value_type())
+		void resize (size_type n, value_type val = value_type())
 		{
 			if ((int) n < 0)
 			{ return; }
@@ -245,7 +245,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/capacity/
 		 * @return the size of currently allocated storage capacity
 		 */
-		size_type capacity() const
+		size_type capacity () const
 		{
 			return (this->c_capacity);
 		}
@@ -257,7 +257,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/empty/
 		 * @return true if the container size is 0, false otherwise
 		 */
-		bool empty() const
+		bool empty () const
 		{
 			return (this->size() == 0);
 		}
@@ -274,7 +274,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/reserve/
 		 * @param n the minimum capacity for the vector
 		 */
-		void reserve(size_type n)
+		void reserve (size_type n)
 		{
 			if (n > this->capacity())
 			{
@@ -299,7 +299,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		reference operator[](size_type n)
+		reference operator[] (size_type n)
 		{
 			return (this->at(n));
 		}
@@ -313,7 +313,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		const_reference operator[](size_type n) const
+		const_reference operator[] (size_type n) const
 		{
 			return (this->at(n));
 		}
@@ -328,7 +328,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		reference at(size_type n)
+		reference at (size_type n)
 		{
 			return (*(this->c_container + n));
 		}
@@ -342,7 +342,7 @@ namespace ft
 		 * @param n position of an element in the container
 		 * @return the element at the specified position in the vector
 		 */
-		const_reference at(size_type n) const
+		const_reference at (size_type n) const
 		{
 			return (*(this->c_container + n));
 		}
@@ -355,7 +355,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/front/
 		 * @return the element at the begin
 		 */
-		reference front()
+		reference front ()
 		{
 			return (this->at(0));
 		}
@@ -368,7 +368,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/front/
 		 * @return the element at the begin
 		 */
-		const_reference front() const
+		const_reference front () const
 		{
 			return (this->at(0));
 		}
@@ -381,7 +381,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/end/
 		 * @return the element at the end
 		 */
-		reference back()
+		reference back ()
 		{
 			return (this->at(this->size() - 1));
 		}
@@ -394,7 +394,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/end/
 		 * @return the element at the end
 		 */
-		const_reference back() const
+		const_reference back () const
 		{
 			return (this->at(this->size() - 1));
 		}
@@ -408,7 +408,7 @@ namespace ft
 		 * @param first begin of the range
 		 * @param last end of the range
 		 */
-		void assign(iterator first, iterator last)
+		void assign (iterator first, iterator last)
 		{
 			difference_type difference = (last - first);
 			reserve(difference);
@@ -429,7 +429,7 @@ namespace ft
 		 * @param first begin of the range
 		 * @param last end of the range
 		 */
-		void assign(const_iterator first, const_iterator last)
+		void assign (const_iterator first, const_iterator last)
 		{
 			difference_type difference = (last - first);
 			reserve(difference);
@@ -450,7 +450,7 @@ namespace ft
 		 * @param n new size of the container
 		 * @param val value to fill container with
 		 */
-		void assign(size_type n, const value_type &val)
+		void assign (size_type n, const value_type &val)
 		{
 			reserve(n);
 			this->clear();
@@ -465,7 +465,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/push_back/
 		 * @param val value to be copied
 		 */
-		void push_back(const value_type &val)
+		void push_back (const value_type &val)
 		{
 			// make request to reserve some space
 			if (this->size() + 1 > this->capacity())
@@ -480,7 +480,7 @@ namespace ft
 		 * Removes the last element in the vector, reducing the container size by one
 		 * @reference https://www.cplusplus.com/reference/vector/vector/pop_back/
 		 */
-		void pop_back()
+		void pop_back ()
 		{
 			this->erase(this->end());
 		}
@@ -497,7 +497,7 @@ namespace ft
 		 * @param val value to be copied
 		 * @return an iterator that points to the first of the newly inserted element
 		 */
-		iterator insert(iterator position, const value_type &val)
+		iterator insert (iterator position, const value_type &val)
 		{
 			difference_type _position_index = position - this->begin();
 			insert(position, (size_type) 1, (value_type &) val);
@@ -516,7 +516,7 @@ namespace ft
 		 * @param n number of elements to insert
 		 * @param val value to be copied
 		 */
-		void insert(iterator position, size_type n, const value_type &val)
+		void insert (iterator position, size_type n, const value_type &val)
 		{
 			if (n <= 0)
 			{ return; }
@@ -541,7 +541,7 @@ namespace ft
 		 * @param first begin of element's range
 		 * @param last end of element's range
 		 */
-		void insert(iterator position, iterator first, iterator last)
+		void insert (iterator position, iterator first, iterator last)
 		{
 			difference_type _position_index = position - this->begin();
 			difference_type _elements       = last - first;
@@ -565,7 +565,7 @@ namespace ft
 		 * @param position iterator pointing to a single element to be removed
 		 * @return an iterator pointing to the new location of the last element erased
 		 */
-		iterator erase(iterator position)
+		iterator erase (iterator position)
 		{
 			difference_type _pos_index = position - this->begin();
 			for (size_type  index      = _pos_index; index < this->size() - 1; index++)
@@ -585,7 +585,7 @@ namespace ft
 		 * @param last end of the range
 		 * @return an iterator pointing to the new location of the last element erased
 		 */
-		iterator erase(iterator first, iterator last)
+		iterator erase (iterator first, iterator last)
 		{
 			difference_type _first_index = first - this->begin();
 			difference_type _last_index  = last - this->begin();
@@ -604,7 +604,7 @@ namespace ft
 		 * @reference https://www.cplusplus.com/reference/vector/vector/swap/
 		 * @param x another vector
 		 */
-		void swap(vector &x)
+		void swap (vector &x)
 		{
 			ft::swap(this->c_len, x.c_len);
 			ft::swap(this->c_container, x.c_container);
@@ -617,7 +617,7 @@ namespace ft
 		 * A reallocation is not guaranteed to happen
 		 * @reference https://www.cplusplus.com/reference/vector/vector/clear/
 		 */
-		void clear()
+		void clear ()
 		{
 			if (!this->empty())
 				this->erase(this->begin(), this->end());
@@ -632,7 +632,7 @@ namespace ft
 		 * Returns a copy of the allocator object associated with the vector
 		 * @return the allocator
 		 */
-		allocator_type get_allocator() const
+		allocator_type get_allocator () const
 		{
 			return (this->allocator);
 		}
@@ -640,7 +640,7 @@ namespace ft
 
 	// TODO implement relational operators
 	template<class T>
-	bool operator==(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator== (const vector<T> &lhs, const vector<T> &rhs)
 	{
 		if (lhs.size() != rhs.size())
 		{ return (false); }
@@ -653,9 +653,10 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator<(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator< (const vector<T> &lhs, const vector<T> &rhs)
 	{
-		if (lhs.size() != rhs.size()) {
+		if (lhs.size() != rhs.size())
+		{
 			return (lhs.size() < rhs.size());
 		}
 		for (typename vector<T>::size_type i = 0; i < rhs.size(); ++i)
@@ -667,25 +668,25 @@ namespace ft
 	}
 
 	template<class T>
-	bool operator!=(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator!= (const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(lhs == rhs));
 	}
 
 	template<class T>
-	bool operator>(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator> (const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (rhs < lhs);
 	}
 
 	template<class T>
-	bool operator<=(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator<= (const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(rhs < lhs));
 	}
 
 	template<class T>
-	bool operator>=(const vector<T> &lhs, const vector<T> &rhs)
+	bool operator>= (const vector<T> &lhs, const vector<T> &rhs)
 	{
 		return (!(lhs < rhs));
 	}

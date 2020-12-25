@@ -32,6 +32,12 @@ header:
 
 all:		${NAME}
 
+leaks:		re
+			@echo "\033[0;34mTesting ${NAME}...\033[0;0m"
+			@valgrind ./${NAME} 2> leaks.txt
+			@cat leaks.txt | tail -n 8
+			@rm leaks.txt
+
 clean:
 			@${RM} ${OBJS}
 			@printf "\033[0;35mPROJECT\033[0;0m:      \033[0;32mCleaned\033[0;0m\n"
